@@ -2,15 +2,15 @@
 
 # Installation
 
-###1. Build the jar
+### 1. Build the jar
 
    Gradle > UserService > Tasks > build > bootjar
 
-###2. Build an image of the service
+### 2. Build an image of the service
 
    Gradle > UserService > Tasks > docker > docker
 
-###3. Run the docker container 
+### 3. Run the docker container 
 
 ```bash
 docker compose up
