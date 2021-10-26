@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  covid-user-db:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./userdatabase/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: -p 6001
+#    ports:
+#      - "5432:5432"
+  user-service:
+    image: userservice:0.0.1
+    ports:
+      - "5001:5001"
+    depends_on:
+      - covid-user-db
