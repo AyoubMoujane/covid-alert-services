@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.postgresql:postgresql'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter-jetty'
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    testImplementation('org.springframework.security:spring-security-test')
 }
 
 configurations.implementation {

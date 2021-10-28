@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private String username;
 
     @NotBlank
     private String first_name;
@@ -21,12 +21,12 @@ public class User {
     @NotBlank
     private String password;
 
-    public long getUser_id() {
-        return user_id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUsername(String user_id) {
+        this.username = user_id;
     }
 
     public String getFirst_name() {
