@@ -9,9 +9,9 @@ services:
       - POSTGRES_USER=postgres
     volumes:
       - ./userdatabase/init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: -p 6001 # Uncomment if you want to launch the multi-services configuration
-#    ports: # Uncomment if you want individual service test development
-#      - "5432:5432"
+#    command: -p 6001 # Uncomment if you want to launch the multi-services configuration
+    ports: # Uncomment if you want individual service test development
+      - "5432:5432"
   user-service:
     image: userservice:0.0.1
     ports:
