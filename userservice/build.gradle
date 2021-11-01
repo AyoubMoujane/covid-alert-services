@@ -26,9 +26,12 @@ dependencies {
     implementation 'org.postgresql:postgresql'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter-jetty'
-    implementation('org.springframework.boot:spring-boot-starter-security')
-    testImplementation('org.springframework.security:spring-security-test')
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.4.6'
+    implementation 'org.springframework.security:spring-security-oauth2-jose:5.5.2'
+
 }
 
 configurations.implementation {
