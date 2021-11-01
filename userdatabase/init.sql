@@ -17,8 +17,8 @@ CREATE TABLE authorities(
 
 
 INSERT INTO users(username,password,enabled,first_name,last_name,email,phone_number) VALUES
-                                                                       ('JohnDoe','$2a$12$Kzl/8M5LWS9QgBkIn0DN7.Fic/8U1znZQk34ETnBCVbCImxkIz.LK',true,'John','Doe','tom.rob@yopmail.com','+15103754657'),
-                                                                       ('TomRob','$2a$12$GMxFI99MxXWK3pOwhCtAYONOdPn9QmL0YAJYxsj3rvs0kClxoOm86',true,'Tom','Rob','john.doe@gmail.com','+41403257832');
+                                                                       ('JohnDoe','$2a$12$Kzl/8M5LWS9QgBkIn0DN7.Fic/8U1znZQk34ETnBCVbCImxkIz.LK',true,'John','Doe','john.doe@gmail.com','+15103754657'),
+                                                                       ('TomRob','$2a$12$GMxFI99MxXWK3pOwhCtAYONOdPn9QmL0YAJYxsj3rvs0kClxoOm86',true,'Tom','Rob','tom.rob@yopmail.com','+41403257832');
 
 INSERT INTO authorities(authority_id,username,authority) VALUES
                                                                     (1,'JohnDoe','USER'),
