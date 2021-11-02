@@ -22,6 +22,8 @@ public class UsersController {
     public List<User> list() {
         return userRepository.findAll();
     }
+
+
     @GetMapping
     @RequestMapping("{id}")
     public User get(@PathVariable Long id) {
