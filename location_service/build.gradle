@@ -25,6 +25,11 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly('org.apache.tomcat.embed:tomcat-embed-jasper')
 
+    implementation('org.springframework:spring-context:5.3.10')
+    implementation('org.springframework:spring-web:5.3.10')
+    implementation('org.springframework:spring-webmvc:5.3.10')
+
+
 
 }
 

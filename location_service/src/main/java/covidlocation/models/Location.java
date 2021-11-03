@@ -2,6 +2,9 @@ package covidlocation.models;
 
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity(name="locations")
 @Access(AccessType.FIELD)
@@ -11,7 +14,7 @@ public class Location {
     private long location_id;
     private long latitude;
     private long longitude;
-    private String location_date;
+    private Timestamp location_date;
 
     public long getLocation_id() {
         return location_id;
@@ -37,11 +40,11 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public String getLocation_date() {
+    public Timestamp getLocation_date() {
         return location_date;
     }
 
-    public void setLocation_date(String location_date) {
+    public void setLocation_date(Timestamp location_date) {
         this.location_date = location_date;
     }
 }

@@ -1,4 +1,6 @@
 rootProject.name = 'covid-alert-backend'
 
 include 'userservice', 'userdatabase'
+include 'localisation_Service'
+include 'location_service'
 

@@ -43,14 +43,23 @@ public class LocationsController {
     @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         // TODO: Ajouter ici une validation si tous les champs ont ete passesSinon, retourner une erreur 400 (Bad Payload)
+        if(locationRepository.findById(id).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location with ID "+id+" not found");
+        }
         locationRepository.deleteById(id);
     }
 
     @RequestMapping(value="{id}",method = RequestMethod.PUT)
     public Location update(@PathVariable Long id, @RequestBody Location location) {
         // TODO: Ajouter ici une validation si tous les champs ont ete passes Sinon, retourner une erreur 400 (Bad Payload)
+        if(locationRepository.findById(id).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location with ID "+id+" not found");
+        }
         Location existingUser = locationRepository.findById(id).get();
         BeanUtils.copyProperties(location,existingUser,"location_id");
         return locationRepository.saveAndFlush(existingUser);
     }
+
+
+
 }
