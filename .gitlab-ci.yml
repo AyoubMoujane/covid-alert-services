@@ -10,6 +10,10 @@ services:
   - docker:dind
 
 before_script:
+  - apk update
+  - apk upgrade
+  - apk add util-linux pciutils usbutils coreutils binutils findutils grep
+  - apk add python python-dev py-pip
   - pip install awscli
 
 stages:
