@@ -10,7 +10,7 @@ services:
   - docker:dind
 
 before_script:
-  - apk add --update --no-cache curl py-pip
+  - apk add --no-cache curl jq python py-pip
   - pip install awscli
 
 stages:
