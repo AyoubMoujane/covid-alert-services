@@ -3,7 +3,6 @@ image: docker:20
 
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
-  AWS_DEFAULT_REGION: us-east-1
   APP_NAME: covid-alert-services
   DOCKER_HOST: tcp://docker:2375
 
@@ -19,6 +18,9 @@ build-docker-image:
     - apk add --no-cache curl python3 py3-pip
     - pip install awscli
     - aws --version
+    - aws configure set aws_access_key_id $AWS_ACCES_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region $AWS_DEFAULT_REGION
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script:
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID ./userservice
