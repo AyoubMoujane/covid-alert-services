@@ -1,26 +1,11 @@
-image: docker:latest
-#image: ruby:2.6
-
-variables:
-  DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com/covid-alert-services
-  AWS_DEFAULT_REGION: us-east-1
-  APP_NAME: covid-alert-services
-
-services:
-  - docker:dind
-
-before_script:
-  - apk add --update --no-cache curl py-pip
-  - pip install awscli
-
 stages:
-  - build
+  - trigger-microservices-pipelines
 
-build-docker-image:
-  stage: build
-  script:
-    - docker build --no-cache -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD .
-    - $(aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY)
-    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD
+userservice:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: userservice/.gitlab-ci.yml
+    strategy: depend
   only:
-    - pipelineCiCd-Pierre
+    changes:
+      - userservice/**/*
