@@ -1,5 +1,10 @@
 image: docker:19.03.12
 
+services:
+  - name: docker:19.03.12-dind
+    entrypoint: ["env","-u","DOCKER_HOST"]
+    command: ["dockerd-entrypoint.sh"]
+
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
