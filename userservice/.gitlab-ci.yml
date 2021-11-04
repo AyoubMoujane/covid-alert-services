@@ -19,8 +19,8 @@ build-docker-image:
     - apk add --no-cache curl python3 py3-pip
     - pip install awscli
     - aws --version
-  script:
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+  script:
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID ./userservice
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD
   only:
