@@ -19,9 +19,6 @@ build-docker-image:
     - apk add --no-cache curl python3 py3-pip
     - pip install awscli
     - aws --version
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key_id $AWS_SECRET_ACCESS_KEY
-    - aws configure set region $AWS_DEFAULT_REGION
   script:
     - docker build -t "$DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD" .
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
