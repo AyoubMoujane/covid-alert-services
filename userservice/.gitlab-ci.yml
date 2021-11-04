@@ -10,8 +10,13 @@ services:
   - docker:dind
 
 before_script:
-  - apk add --no-cache curl jq python py-pip
+  - apk add --no-cache curl python3 py3-pip
   - pip install awscli
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+  - aws configure set aws_secret_access_key_id $AWS_SECRET_ACCESS_KEY
+  - aws configure set region $AWS_DEFAULT_REGION
+  - aws --version
+  - docker --version
 
 stages:
   - build
@@ -20,7 +25,7 @@ build-docker-image:
   stage: build
   script:
     - docker build -t "$DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD" .
-    - $(aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY)
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD
   only:
     - pipelineCiCd-Pierre
