@@ -21,13 +21,13 @@ stages:
 
 build-docker-image:
   stage: build-image
-  services:
-    - name: $DOCKER_REGISTRY/$APP_NAME/docker:19.03.12-dind
-      alias: docker
+#  services:
+#    - docker:19.03.12-dind
+
   before_script:
-    - apk add --no-cache curl python3 py3-pip
-    - pip install awscli
-    - aws --version
+#    - apk add --no-cache curl python3 py3-pip
+#    - pip install awscli
+#    - aws --version
     - docker info
 #    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
 #    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
