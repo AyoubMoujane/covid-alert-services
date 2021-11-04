@@ -1,16 +1,26 @@
 image: docker:19.03.12
-#image: ruby:2.6
 
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
   DOCKER_HOST: tcp://docker:2375
 
+
 stages:
-  - build
+#  - build-jar
+  - build-image
+
+#build-microservice-jar:
+#  stage: build-jar
+#  image: gradle:jdk16
+#  before_script:
+#    - export GRADLE_USER_HOME=`pwd`/.gradle
+#  script:
+#    - ./gradlew assemble
+
 
 build-docker-image:
-  stage: build
+  stage: build-image
   services:
     - docker:19.03.12-dind
   before_script:
