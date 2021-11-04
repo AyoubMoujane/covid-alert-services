@@ -2,7 +2,7 @@ image: docker:20
 #image: ruby:2.6
 
 variables:
-  DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com/covid-alert-services
+  DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   AWS_DEFAULT_REGION: us-east-1
   APP_NAME: covid-alert-services
   DOCKER_HOST: tcp://docker:2375
