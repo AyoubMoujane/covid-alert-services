@@ -10,13 +10,6 @@ stages:
 #  - build-jar
   - build-image
 
-#build-microservice-jar:
-#  stage: build-jar
-#  image: gradle:jdk16
-#  before_script:
-#    - export GRADLE_USER_HOME=`pwd`/.gradle
-#  script:
-#    - ./gradlew assemble
 
 
 build-docker-image:
