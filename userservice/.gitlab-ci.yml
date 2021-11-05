@@ -8,6 +8,7 @@ services:
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
+  DOCKER_HOST: tcp://docker:2375
 
 stages:
 #  - build-jar
