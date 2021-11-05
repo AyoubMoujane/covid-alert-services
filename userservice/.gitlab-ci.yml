@@ -35,7 +35,7 @@ build-docker-image:
 #    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script:
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID ./userservice
-    - aws ecr get-login-password --region '${AWS_DEFAULT_REGION}' | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD
   only:
     - pipelineCiCd-Pierre
