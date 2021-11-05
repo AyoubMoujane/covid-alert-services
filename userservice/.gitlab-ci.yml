@@ -1,8 +1,9 @@
-image: docker:20.10.10
-
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
+
+services:
+  - docker:dind
 
 stages:
 #  - build-jar
@@ -19,8 +20,6 @@ stages:
 
 build-docker-image:
   stage: build-image
-  services:
-    - docker:20.10.10-dind
 
   before_script:
 #    - apk add --no-cache curl python3 py3-pip
