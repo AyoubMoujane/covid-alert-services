@@ -37,6 +37,6 @@ build-docker-image:
   script:
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID ./userservice
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IDD
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
   only:
     - pipelineCiCd-Pierre
