@@ -1,4 +1,6 @@
-image: docker:19.03.12
+image:
+  name: docker:19.03.12
+  entrypoint: [""]
 
 services:
   - docker:dind
