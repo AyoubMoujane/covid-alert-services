@@ -44,8 +44,10 @@ public class UsersController {
     public User update(@PathVariable Long id, @RequestBody @Valid User user) {
         User existingUser = userRepository.getById(id);
         // Le dernier argument permet d'empêcher l'alteration de l'id du user dans la base de donnée
-        BeanUtils.copyProperties(user,existingUser,"user_id");
+        BeanUtils.copyProperties(user, existingUser, "user_id");
         return userRepository.saveAndFlush(existingUser);
     }
+
+
 
 }

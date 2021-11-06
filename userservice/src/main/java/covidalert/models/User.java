@@ -3,7 +3,7 @@ package covidalert.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Entity(name="users")
+@Entity(name="user_entity")
 @Access(AccessType.FIELD)
 public class User {
     @Id
@@ -16,10 +16,8 @@ public class User {
     private String last_name;
     @NotBlank
     private String email;
-    @NotBlank
-    private String phone_number;
-    @NotBlank
-    private String password;
+
+//    private String phone_number;
 
     public String getUsername() {
         return username;
@@ -53,20 +51,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPhone_number() {
+//        return phone_number;
+//    }
+//
+//    public void setPhone_number(String phone_number) {
+//        this.phone_number = phone_number;
+//    }
 
 }
