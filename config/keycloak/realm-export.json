@@ -779,7 +779,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "dev-secret-1",
       "redirectUris": [
         "http://localhost:8080/login/oauth2/code/spring-cloud-gateway-client"
       ],
