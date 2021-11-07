@@ -50,3 +50,7 @@ services:
       - "5001:5001"
     depends_on:
       - covid-user-db
+  discovery-service:
+    image: discoveryserver:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
