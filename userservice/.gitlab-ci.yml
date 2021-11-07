@@ -2,6 +2,9 @@ variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
   MICROSERVICE_NAME: userservice
+#  TASK_DEFINITION_NAME: <Task_Definition>
+#  CLUSTER_NAME: <CLUSTER_NAME>
+#  SERVICE_NAME: <SERVICE_NAME>
 
 services:
   - docker:dind
@@ -9,25 +12,46 @@ services:
 stages:
 #  - build-jar
   - build-image
+#  - deploy-image
 
+before_script:
+  - docker --version
+  - apk add --no-cache curl python3 py3-pip
+  - pip install awscli
+  - aws --version
+  - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+  - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+  - aws configure set region ${AWS_DEFAULT_REGION}
+  - aws configure list
+
+#build-microservice-jar:
+#  stage: build-jar
+#  image: gradle:jdk16
+#  before_script:
+#    - export GRADLE_USER_HOME=`pwd`/.gradle
+#  script:
+#    - ./gradlew assemble
 
 
 build-docker-image:
   stage: build-image
 
-  before_script:
-    - docker --version
-    - apk add --no-cache curl python3 py3-pip
-    - pip install awscli
-    - aws --version
-    - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
-    - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-    - aws configure set region ${AWS_DEFAULT_REGION}
-    - aws configure list
-
   script:
+    - echo "Building image..."
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME ./userservice
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - echo "Pushing image..."
     - docker push $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME
   only:
     - pipelineCiCd-Pierre
+
+#deploy-docker-image:
+#  stage: deploy-image
+#  script:
+#    - echo $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME
+#    - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition "$TASK_DEFINITION_NAME" --region "${AWS_DEFAULT_REGION}")
+#    - NEW_CONTAINER_DEFINTIION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
+#    - echo "Registering new container definition..."
+#    - aws ecs register-task-definition --region "${AWS_DEFAULT_REGION}" --family "${TASK_DEFINITION_NAME}" --container-definitions "${NEW_CONTAINER_DEFINTIION}"
+#    - echo "Updating the service..."
+#    - aws ecs update-service --region "${AWS_DEFAULT_REGION}" --cluster "${CLUSTER_NAME}" --service "${SERVICE_NAME}"  --task-definition "${TASK_DEFINITION_NAME}"
