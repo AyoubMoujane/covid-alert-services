@@ -20,7 +20,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
     volumes:
       - ./userdatabase/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports: # Uncomment if you want individual service test development
+    ports:
       - "5432:5432"
 
   keycloak:
