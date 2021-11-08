@@ -1,17 +1,17 @@
 version: "3.8"
 
 services:
-  pgadmin:
-    depends_on:
-      - covid-user-db
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
+#  pgadmin:
+#    depends_on:
+#      - covid-user-db
+#    container_name: pgadmin
+#    image: dpage/pgadmin4
+#    restart: always
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#      PGADMIN_DEFAULT_PASSWORD: root
+#    ports:
+#      - "5050:80"
   covid-user-db:
     image: postgres:alpine
     restart: unless-stopped
@@ -43,12 +43,20 @@ services:
     volumes:
       - ./config/keycloak/realm-export.json:/tmp/realm-export.json
 
+  api-gateway-service:
+    image: apigatewayservice:0.0.1-SNAPSHOT
+    ports:
+      - "8090:8090"
+    depends_on:
+      - keycloak
+
   user-service:
     image: userservice:0.0.1
     ports:
       - "5001:5001"
     depends_on:
       - covid-user-db
+      - keycloak
   discovery-service:
     image: discoveryserver:0.0.1-SNAPSHOT
     ports:
