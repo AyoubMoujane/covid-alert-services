@@ -11,8 +11,12 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public void configure(HttpSecurity security) throws Exception {
-        security.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+        // TODO : solve issuer url problem when switching to docker-compose
+//        security.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
+//                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+
+        // Temporary solution to get a running environment
+        security.authorizeRequests(authorize -> authorize.anyRequest().permitAll());
     }
 
 
