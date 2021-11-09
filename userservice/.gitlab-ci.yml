@@ -35,6 +35,7 @@ before_script:
 
 build-docker-image:
   stage: build-image
+  image: openjdk:16-jdk-alpine
 
   script:
     - echo "Building image..."
