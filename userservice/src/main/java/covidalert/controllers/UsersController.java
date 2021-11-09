@@ -33,6 +33,7 @@ public class UsersController {
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public UserRepresentation get(@PathVariable String username) {
+        // TODO : error handling when user doesn't exist
         return userResource.search(username).get(0);
     }
 
@@ -63,20 +64,6 @@ public class UsersController {
         return createdUser;
     }
 
-    @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
-        // Toujours verifier s'il faut supprimer aussi
-        // les enregistrements enfants
-        userRepository.deleteById(id);
-    }
-    @RequestMapping(value="{id}",method = RequestMethod.PUT)
-    public User update(@PathVariable Long id, @RequestBody @Valid User user) {
-        User existingUser = userRepository.getById(id);
-        // Le dernier argument permet d'empêcher l'alteration de l'id du user dans la base de donnée
-        BeanUtils.copyProperties(user, existingUser, "user_id");
-        return userRepository.saveAndFlush(existingUser);
-    }
-
-
+    // TODO : implemented delete and update route
 
 }
