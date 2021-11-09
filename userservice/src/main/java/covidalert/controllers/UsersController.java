@@ -1,8 +1,12 @@
 package covidalert.controllers;
 
 
+import covidalert.config.KeyCloakConfig;
 import covidalert.models.User;
 import covidalert.repositories.UserRepository;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,17 +22,19 @@ public class UsersController {
     @Autowired
     private UserRepository userRepository;
 
+    Keycloak keycloak = KeyCloakConfig.getInstance();
+    RealmResource userResource = keycloak.realm("microservices-realm");
+
     @GetMapping
-    public List<User> list() {
-        return userRepository.findAll();
+    public List<UserRepresentation> list() {
+        return userResource.users().list();
     }
-    @GetMapping
-    @RequestMapping("{id}")
-    public User get(@PathVariable Long id) {
-        if(userRepository.findById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID "+id+" not found");
-        }
-        return userRepository.getById(id);    }
+
+//    @GetMapping
+//    @RequestMapping("{id}")
+//    public User get(@PathVariable Long id) {
+//
+//    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody final User user) {
