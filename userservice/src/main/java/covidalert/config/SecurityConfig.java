@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Temporary solution to get a running environment
         security.authorizeRequests(authorize -> authorize.anyRequest().permitAll());
+        security.csrf().disable();
     }
 
 
