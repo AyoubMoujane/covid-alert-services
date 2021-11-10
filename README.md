@@ -4,17 +4,20 @@
 
 ### 1. Build the jar
 
-   Gradle > UserService > Tasks > build > bootjar
+   Gradle > ExampleService > Tasks > build > bootjar
 
 ### 2. Build an image of the service
 
-   Gradle > UserService > Tasks > docker > docker
+   Gradle > ExampleService > Tasks > docker > docker
 
-### 3. Run the docker container 
+### 3. Run the docker containers 
 
 ```bash
 docker compose up
 ```
+
+#### Some microservices might crash because the container they need to use is not ready yet
+#### You just have to restart them
 
 # Stop the service 
 
