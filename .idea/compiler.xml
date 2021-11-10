@@ -11,11 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="testMicroservicesApp" target="16" />
-      <module name="testMicroservicesApp.DatabaseService.main" target="16" />
-      <module name="testMicroservicesApp.DatabaseService.test" target="16" />
-      <module name="testMicroservicesApp.main" target="16" />
-      <module name="testMicroservicesApp.test" target="16" />
+      <module name="covid-alert-backend.localisation_Service.main" target="16" />
+      <module name="covid-alert-backend.localisation_Service.test" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

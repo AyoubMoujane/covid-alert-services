@@ -1,4 +1,4 @@
 rootProject.name = 'covid-alert-backend'
 
-include 'userservice', 'userdatabase', 'apigatewayservice', 'discoveryserver'
+include 'userservice', 'userdatabase', 'apigatewayservice', 'discoveryserver','location_service'
 
