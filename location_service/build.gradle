@@ -7,6 +7,7 @@ plugins {
 
 }
 
+
 group = 'com.example'
 version = '0.0.1'
 sourceCompatibility = '11'
@@ -33,6 +34,10 @@ dependencies {
     implementation('org.springframework:spring-webmvc:5.3.10')
     implementation fileTree(dir: '../userservice/build/libs', include: ['*.jar'])
 
+    implementation ('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') {
+        exclude group: 'javax.ws.rs', module: 'jsr311-api'
+    }
+
 
 
 }
@@ -56,4 +61,14 @@ dockerRun {
     image "${project.name}:${project.version}"
     ports '3000:3000'
     daemonize true
+}
+
+ext {
+    set('springCloudVersion', "2020.0.4")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
