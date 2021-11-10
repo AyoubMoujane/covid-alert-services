@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="covid-alert-backend.localisation_Service.main" target="16" />
+      <module name="covid-alert-backend.localisation_Service.test" target="16" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
