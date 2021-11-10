@@ -1,7 +1,10 @@
 plugins {
     id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.palantir.docker' version "0.22.1"
+    id 'com.palantir.docker-run' version "0.22.1"
     id 'java'
+
 }
 
 group = 'com.example'
@@ -28,6 +31,7 @@ dependencies {
     implementation('org.springframework:spring-context:5.3.10')
     implementation('org.springframework:spring-web:5.3.10')
     implementation('org.springframework:spring-webmvc:5.3.10')
+    implementation fileTree(dir: '../userservice/build/libs', include: ['*.jar'])
 
 
 
@@ -41,3 +45,15 @@ test {
     useJUnitPlatform()
 }
 
+docker {
+    name "${project.name}:${project.version}"
+    files "$buildDir/libs/${project.name}-${project.version}.jar"
+    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
+}
+
+dockerRun {
+    name "${project.name}"
+    image "${project.name}:${project.version}"
+    ports '3000:3000'
+    daemonize true
+}

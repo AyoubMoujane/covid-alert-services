@@ -1,10 +1,12 @@
 package covidlocation.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
+
 
 @Entity(name="locations")
 @Access(AccessType.FIELD)
@@ -15,6 +17,12 @@ public class Location {
     private long latitude;
     private long longitude;
     private Timestamp location_date;
+
+
+
+    @ManyToMany(mappedBy = "locations")
+    @JsonIgnore // Pour ne pas produire des cycles
+    private List<User> users;
 
     public long getLocation_id() {
         return location_id;
@@ -46,5 +54,13 @@ public class Location {
 
     public void setLocation_date(Timestamp location_date) {
         this.location_date = location_date;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
