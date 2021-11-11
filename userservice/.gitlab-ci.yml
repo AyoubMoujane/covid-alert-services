@@ -1,5 +1,3 @@
-image: docker:20.10.10
-
 variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
@@ -37,7 +35,7 @@ before_script:
 
 build-docker-image:
   stage: build-image
-  image: openjdk:16-jdk-alpine
+#  image: openjdk:16-jdk-alpine
 
   script:
     - echo "Building image..."
