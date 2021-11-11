@@ -39,7 +39,7 @@ build-docker-image:
 
   script:
     - echo "Building image..."
-    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME ./userservice
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME .
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - echo "Pushing image..."
     - docker push $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME
