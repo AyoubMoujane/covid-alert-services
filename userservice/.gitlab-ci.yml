@@ -33,8 +33,9 @@ build-microservice-jar:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
   script:
+    - ls -l userservice/
     - ./gradlew userservice:bootJar
-    - ls
+    - ls -l userservice/build/libs/
   artifacts:
     paths:
       - userservice/build/libs/*.jar
