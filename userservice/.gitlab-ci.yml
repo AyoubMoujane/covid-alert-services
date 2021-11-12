@@ -2,6 +2,7 @@ variables:
   DOCKER_REGISTRY: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
   MICROSERVICE_NAME: userservice
+  ARTIFACT_NAME: ${project.name}:${project.version}.jar
 #  TASK_DEFINITION_NAME: <Task_Definition>
 #  CLUSTER_NAME: <CLUSTER_NAME>
 #  SERVICE_NAME: <SERVICE_NAME>
@@ -10,7 +11,7 @@ services:
   - docker:dind
 
 stages:
-#  - build-jar
+  - build-jar
   - build-image
 #  - deploy-image
 
@@ -24,18 +25,20 @@ before_script:
   - aws configure set region ${AWS_DEFAULT_REGION}
   - aws configure list
 
-#build-microservice-jar:
-#  stage: build-jar
-#  image: gradle:jdk16
-#  before_script:
-#    - export GRADLE_USER_HOME=`pwd`/.gradle
-#  script:
-#    - ./gradlew assemble
+build-microservice-jar:
+  image: gradle:7.2.0-jdk8
+  stage: build-jar
 
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+  script:
+    - ./gradlew bootJar
+  artifacts:
+    paths:
+      - build/libs/
 
 build-docker-image:
   stage: build-image
-#  image: openjdk:16-jdk-alpine
 
   script:
     - echo "Building image..."

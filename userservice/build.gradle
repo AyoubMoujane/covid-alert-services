@@ -28,11 +28,6 @@ configurations.implementation {
     exclude module: "spring-boot-starter-tomcat"
 }
 
-bootJar {
-    mainClass = 'covidalert.UserServiceApplication'
-}
-
-
 test {
     useJUnitPlatform()
 }
