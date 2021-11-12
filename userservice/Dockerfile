@@ -1,7 +1,4 @@
-FROM openjdk:16-jdk-alpine
-VOLUME /tmp
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
+FROM openjdk:16
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
