@@ -26,16 +26,16 @@ before_script:
   - aws configure list
 
 build-microservice-jar:
-  image: gradle:7.2.0-jdk8
+  image: gradle:7.2.0-jdk11
   stage: build-jar
 
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
-    - ./gradlew bootJar
+    - ./gradlew bootJar --debug
   artifacts:
     paths:
-      - build/libs/
+      - build/libs/$ARTIFACT_NAME
 
 build-docker-image:
   stage: build-image
