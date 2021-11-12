@@ -45,6 +45,7 @@ build-docker-image:
 
   script:
     - echo "Building image..."
+    - ls -l userservice/build/libs/
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$MICROSERVICE_NAME ./userservice
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - echo "Pushing image..."
