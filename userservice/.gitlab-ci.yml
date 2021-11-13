@@ -34,7 +34,7 @@ build-microservice-jar:
     - echo $ARTIFACT_NAME
   script:
     - ls -l userservice/
-    - ./gradlew userservice:bootJar
+    - ./gradlew userservice:assemble
     - ls -l userservice/build/libs/
   artifacts:
     paths:
