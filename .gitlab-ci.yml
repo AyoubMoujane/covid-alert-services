@@ -8,4 +8,6 @@ userservice:
     strategy: depend
   only:
     changes:
+      - master
       - userservice/**/*
+
