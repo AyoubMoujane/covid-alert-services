@@ -17,7 +17,7 @@ stages:
 
 before_script:
   - docker --version
-  - apk add --no-cache curl python3 py3-pip
+  - apk add --no-cache curl jq python3 py3-pip
   - pip install awscli
   - aws --version
   - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
@@ -59,7 +59,8 @@ deploy-docker-image:
     - echo $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
     - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME --region ${AWS_DEFAULT_REGION})
     - echo $TASK_DEFINITION
-#    - NEW_CONTAINER_DEFINTIION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
+    - NEW_CONTAINER_DEFINTIION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
+    - echo $NEW_CONTAINER_DEFINTIION
 #    - echo "Registering new container definition..."
 #    - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --container-definitions ${NEW_CONTAINER_DEFINTIION}
 #    - echo "Updating the service..."
