@@ -53,6 +53,7 @@ before_script:
 #  only:
 #    - pipelineCiCd-Pierre
 
+
 deploy-docker-image:
   stage: deploy-image
   script:
