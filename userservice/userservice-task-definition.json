@@ -29,19 +29,11 @@
   ],
   "placementConstraints": [],
   "memory": "512",
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
   "family": "userservice_task",
   "requiresCompatibilities": [
     "FARGATE"
   ],
   "networkMode": "awsvpc",
-  "runtimePlatform": {
-    "operatingSystemFamily": "LINUX",
-    "cpuArchitecture": null
-  },
   "cpu": "256",
   "volumes": []
 }
