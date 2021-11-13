@@ -3,7 +3,7 @@ variables:
   APP_NAME: covid-alert-services
   IMAGE_TAG: userservice
   ARTIFACT_NAME: userservice-0.0.1.jar
-  TASK_DEFINITION_NAME: userservice
+  TASK_DEFINITION_NAME: userservice_task
   CLUSTER_NAME: covidalert-microservices
   SERVICE_NAME: userservice-service
 
