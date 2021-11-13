@@ -24,6 +24,8 @@ before_script:
   - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
   - aws configure set region ${AWS_DEFAULT_REGION}
   - aws configure list
+  only:
+    - master
 
 build-microservice-jar:
   image: openjdk:16-jdk-alpine
@@ -40,7 +42,7 @@ build-microservice-jar:
     paths:
       - userservice/build/libs/*.jar
   only:
-    - pipelineCiCd-Pierre
+    - master
 
 build-docker-image:
   stage: build-image
@@ -69,4 +71,4 @@ deploy-docker-image:
     - echo "Updating the service..."
     - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
   only:
-    - pipelineCiCd-Pierre
+    - master
