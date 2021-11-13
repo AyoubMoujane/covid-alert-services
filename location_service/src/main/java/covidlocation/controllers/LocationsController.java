@@ -5,8 +5,6 @@ import covidlocation.models.Location;
 import covidlocation.repositories.LocationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,12 +19,28 @@ public class LocationsController {
 
     @Autowired
     private LocationRepository locationRepository;
-
-    /*@RequestMapping("byUsers/{id}")
-    public List<Location> byUser(@PathVariable long id) {
-        return locationRepository.findAllByUsersOrderByLocation_date(id);
+/*
+    @RequestMapping("byUsers/{id}")
+    public List<Location> byUser(@PathVariable("id") long id) {
+        try {
+            return locationRepository.findByUser(id);
+        }
+        catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
     }
-    */
+*/
+    /*@RequestMapping("nearUsers/{locationList}")
+    public List<Location> getNearUser(@RequestParam long[] locationList) {
+        try {
+            return locationRepository.findNearUser(locationList);
+        }
+        catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
+    }*/
+
+
 
     @GetMapping
     public List<Location> list() {

@@ -26,5 +26,5 @@ INSERT INTO users(user_id,first_name,last_name,email,phone_number,password) VALU
 
 INSERT INTO locations(location_id,latitude,longitude,location_date) VALUES(1000,43.63746472422702,3.8409670228559136,now());
 INSERT INTO locations(location_id,latitude,longitude,location_date) VALUES(1001,46,46,now());
-INSERT INTO user_locations(user_id,location_id) VALUES(1,1);
-INSERT INTO user_locations(user_id,location_id) VALUES(1,2);
+INSERT INTO user_locations(user_id,location_id) VALUES(1,1000);
+INSERT INTO user_locations(user_id,location_id) VALUES(1,1001);

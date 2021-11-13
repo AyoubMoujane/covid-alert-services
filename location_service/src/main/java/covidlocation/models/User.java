@@ -24,9 +24,14 @@ public class User {
 
 
 
+    /*@OneToMany(mappedBy = "user")
+    private List<Location> locations;*/
+
     @ManyToMany
     @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;
+
+
 
 
     public long getUser_id() {

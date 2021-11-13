@@ -20,9 +20,23 @@ public class Location {
 
 
 
+    /*@ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;*/
+
     @ManyToMany(mappedBy = "locations")
     @JsonIgnore // Pour ne pas produire des cycles
     private List<User> users;
+
+
+    public List<User> getUser() {
+        return users;
+    }
+
+    public void setUser(List<User> users) {
+        this.users = users;
+    }
 
     public long getLocation_id() {
         return location_id;
@@ -56,11 +70,5 @@ public class Location {
         this.location_date = location_date;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }
