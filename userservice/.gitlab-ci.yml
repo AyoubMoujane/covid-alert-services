@@ -11,8 +11,8 @@ services:
   - docker:dind
 
 stages:
-#  - build-jar
-#  - build-image
+  - build-jar
+  - build-image
   - deploy-image
 
 before_script:
@@ -25,33 +25,35 @@ before_script:
   - aws configure set region ${AWS_DEFAULT_REGION}
   - aws configure list
 
-#build-microservice-jar:
-#  image: openjdk:16-jdk-alpine
-#  stage: build-jar
-#
-#  before_script:
-#    - export GRADLE_USER_HOME=`pwd`/.gradle
-#    - echo $ARTIFACT_NAME
-#  script:
-#    - ls -l userservice/
-#    - ./gradlew userservice:bootJar
-#    - ls -l userservice/build/libs/
-#  artifacts:
-#    paths:
-#      - userservice/build/libs/*.jar
+build-microservice-jar:
+  image: openjdk:16-jdk-alpine
+  stage: build-jar
 
-#build-docker-image:
-#  stage: build-image
-#
-#  script:
-#    - echo "Building image..."
-#    - ls -l userservice/build/libs/
-#    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./userservice
-#    - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
-#    - echo "Pushing image..."
-#    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
-#  only:
-#    - pipelineCiCd-Pierre
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - echo $ARTIFACT_NAME
+  script:
+    - ls -l userservice/
+    - ./gradlew userservice:bootJar
+    - ls -l userservice/build/libs/
+  artifacts:
+    paths:
+      - userservice/build/libs/*.jar
+  only:
+    - pipelineCiCd-Pierre
+
+build-docker-image:
+  stage: build-image
+
+  script:
+    - echo "Building image..."
+    - ls -l userservice/build/libs/
+    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./userservice
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
+    - echo "Pushing image..."
+    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+  only:
+    - pipelineCiCd-Pierre
 
 
 deploy-docker-image:
@@ -66,3 +68,5 @@ deploy-docker-image:
     - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --cli-input-json file://userservice/userservice-task-definition.json
     - echo "Updating the service..."
     - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
+  only:
+    - pipelineCiCd-Pierre
