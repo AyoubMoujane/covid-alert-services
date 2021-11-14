@@ -24,8 +24,6 @@ before_script:
   - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
   - aws configure set region ${AWS_DEFAULT_REGION}
   - aws configure list
-  only:
-    - pipelineCiCd-Pierre
 
 build-microservice-jar:
   image: openjdk:16-jdk-alpine
