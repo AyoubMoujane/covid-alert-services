@@ -25,8 +25,14 @@ CREATE TABLE locations(
 
 INSERT INTO users(user_id,first_name,last_name,email,phone_number,password) VALUES(1,'Tom','Robinson','tom.rob@yopmail.com','+15103754657','123456');
 INSERT INTO users(user_id,first_name,last_name,email,phone_number,password) VALUES(2,'Bob','Boby','bob.rob@yopmail.com','+15103754657','123456');
+INSERT INTO users(user_id,first_name,last_name,email,phone_number,password) VALUES(3,'Jean','Dupont','bob.rob@yopmail.com','+15103754657','123456');
+INSERT INTO users(user_id,first_name,last_name,email,phone_number,password) VALUES(4,'Jacques','Durant','bob.rob@yopmail.com','+15103754657','123456');
+
 
 INSERT INTO locations(location_id,latitude,longitude,location_date,user_id) VALUES(1000,43.63746472422702,3.8409670228559136,now(),1);
 INSERT INTO locations(location_id,latitude,longitude,location_date,user_id) VALUES(1001,46,46,now(),2);
+INSERT INTO locations(location_id,latitude,longitude,location_date,user_id) VALUES(1002,99,99,now(),3);
+INSERT INTO locations(location_id,latitude,longitude,location_date,user_id) VALUES(1003,46,46,"2019-11-15T20:48:08.831+00:00",4);
+
 
 

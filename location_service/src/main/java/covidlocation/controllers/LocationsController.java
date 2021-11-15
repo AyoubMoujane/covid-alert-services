@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class LocationsController {
 
+    private String USER_SERVICE_URL = "http://localhost:5001/users";
+
     @Autowired
     private LocationRepository locationRepository;
 
@@ -55,6 +57,22 @@ public class LocationsController {
     }
 
 
+    @RequestMapping("users_at_risk/{id}")
+    public Set<Integer> getUsersAtRisk(@PathVariable("id") long id) {
+
+        try {
+            List<Location> locations = new ArrayList<>();
+            locations = locationRepository.getUserLocation(id);
+            return locationRepository.getNearUser(locations);
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw exception;
+
+        }
+    }
+
+
 
 
     @GetMapping
@@ -74,8 +92,9 @@ public class LocationsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Location create(@RequestBody final Location location) {
-        System.out.println(location);
+    public Location create(@RequestBody Location location) {
+        User user = locationRepository.getUser(location.getUser().getUser_id());
+        location.setUser(user);
         return  locationRepository.saveAndFlush(location);
     }
 

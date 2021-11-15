@@ -1,6 +1,7 @@
 package covidlocation.repositories;
 
 import covidlocation.models.Location;
+import covidlocation.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,10 +55,15 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
             if (!this.getNearUserByLocation(location).isEmpty())
             nearUsers.addAll(this.getNearUserByLocation(location));
         }
-
-
-
         return nearUsers;
+    }
+
+    @Override
+    public User getUser(long id) {
+        String sql = "SELECT us FROM User us Where user_id = :id";
+        TypedQuery<User> query = entityManager.createQuery(sql, User.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 
 
