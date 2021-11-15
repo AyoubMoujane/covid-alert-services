@@ -21,16 +21,16 @@ location_service:
       - pipelineGitlabCiCd-pierre
       - location_service/**/*
 
-#discoveryserver:
-#  stage: trigger-microservices-pipelines
-#  trigger:
-#    include: discoveryserver/.gitlab-ci.yml
-#    strategy: depend
-#  only:
-#    changes:
-#      - pipelineGitlabCiCd-pierre
-#      - discoveryserver/**/*
-#
+discoveryserver:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: discoveryserver/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - pipelineGitlabCiCd-pierre
+      - discoveryserver/**/*
+
 #apigatewayservice:
 #  stage: trigger-microservices-pipelines
 #  trigger:

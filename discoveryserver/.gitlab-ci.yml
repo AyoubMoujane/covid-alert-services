@@ -55,7 +55,6 @@ build-docker-image:
   only:
     - pipelineGitlabCiCd-pierre
 
-
 #deploy-docker-image:
 #  stage: deploy-image
 #  script:
