@@ -33,12 +33,12 @@ build-microservice-jar:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
   script:
-    - ls -l discoveryserver/
-    - ./gradlew discoveryserver:bootJar
-    - ls -l discoveryserver/build/libs/
+    - ls -l apigatewayservice/
+    - ./gradlew apigatewayservice:bootJar
+    - ls -l apigatewayservice/build/libs/
   artifacts:
     paths:
-      - discoveryserver/build/libs/*.jar
+      - apigatewayservice/build/libs/*.jar
   only:
     - pipelineGitlabCiCd-pierre
 
@@ -47,7 +47,7 @@ build-docker-image:
 
   script:
     - echo "Building image..."
-    - ls -l discoveryserver/build/libs/
+    - ls -l apigatewayservice/build/libs/
     - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./location_service
     - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
     - echo "Pushing image..."
