@@ -8,5 +8,6 @@ userservice:
     strategy: depend
   only:
     changes:
+      - pipelineGitlabCiCd-pierre
       - userservice/**/*
 

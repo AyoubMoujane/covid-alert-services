@@ -40,7 +40,7 @@ build-microservice-jar:
     paths:
       - userservice/build/libs/*.jar
   only:
-    - pipelineCiCd-Pierre
+    - pipelineGitlabCiCd-pierre
 
 build-docker-image:
   stage: build-image
@@ -53,7 +53,7 @@ build-docker-image:
     - echo "Pushing image..."
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
-    - pipelineCiCd-Pierre
+    - pipelineGitlabCiCd-pierre
 
 
 deploy-docker-image:
@@ -69,4 +69,4 @@ deploy-docker-image:
     - echo "Updating the service..."
     - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
   only:
-    - pipelineCiCd-Pierre
+    - pipelineGitlabCiCd-pierre
