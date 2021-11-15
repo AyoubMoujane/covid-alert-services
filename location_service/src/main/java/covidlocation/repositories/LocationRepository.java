@@ -1,18 +1,18 @@
 package covidlocation.repositories;
 
 import covidlocation.models.Location;
+import covidlocation.models.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 
-public interface LocationRepository extends JpaRepository<Location,Long> {
+public interface LocationRepository extends JpaRepository<Location,Long>,LocationCustomRepository {
 
 
 
-    //@Query(value = "SELECT location_id FROM locations WHERE user = ?1", nativeQuery = true)
-    //List<Location> findByUser(long id);
-
-    //@Query(value = "SELECT user_id FROM Locations WHERE user_id = ?1", nativeQuery = true)
-    //Array[long] findNearUser(List<Location> id);
 
 
 }

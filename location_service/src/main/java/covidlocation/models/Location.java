@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
-@Entity(name="locations")
-@Access(AccessType.FIELD)
+@Entity
+@Table(name= "locations")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,23 +20,26 @@ public class Location {
 
 
 
+
     /*@ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="location_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
     private User user;*/
 
-    @ManyToMany(mappedBy = "locations")
-    @JsonIgnore // Pour ne pas produire des cycles
-    private List<User> users;
 
 
-    public List<User> getUser() {
-        return users;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUser(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+
 
     public long getLocation_id() {
         return location_id;

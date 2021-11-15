@@ -2,6 +2,7 @@ package covidlocation.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import covidlocation.models.Location;
+import covidlocation.models.User;
 import covidlocation.repositories.LocationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -19,26 +22,21 @@ public class LocationsController {
 
     @Autowired
     private LocationRepository locationRepository;
-/*
+
     @RequestMapping("byUsers/{id}")
     public List<Location> byUser(@PathVariable("id") long id) {
+        System.out.println("coucou");
+
         try {
-            return locationRepository.findByUser(id);
+            return locationRepository.getUserLocation(id);
         }
         catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+            System.out.println(exception.getMessage());
+            throw exception;
+
         }
     }
-*/
-    /*@RequestMapping("nearUsers/{locationList}")
-    public List<Location> getNearUser(@RequestParam long[] locationList) {
-        try {
-            return locationRepository.findNearUser(locationList);
-        }
-        catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
-    }*/
+
 
 
 
