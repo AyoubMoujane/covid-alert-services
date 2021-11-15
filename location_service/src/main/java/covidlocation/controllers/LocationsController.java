@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/locations")
@@ -23,7 +24,7 @@ public class LocationsController {
     @Autowired
     private LocationRepository locationRepository;
 
-    @RequestMapping("byUsers/{id}")
+    @RequestMapping("by_user/{id}")
     public List<Location> byUser(@PathVariable("id") long id) {
         System.out.println("coucou");
 
@@ -31,6 +32,22 @@ public class LocationsController {
             return locationRepository.getUserLocation(id);
         }
         catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw exception;
+
+        }
+    }
+
+    @PostMapping
+    @RequestMapping("/near_users")
+    public Set<Integer> getNearUser(@RequestBody final List<Location> location) {
+        System.out.println(location);
+        try {
+            System.out.println(locationRepository.getNearUser(location));
+            return locationRepository.getNearUser(location);
+        }
+        catch (Exception exception) {
+            System.out.println("Error in getNearUser");
             System.out.println(exception.getMessage());
             throw exception;
 
@@ -58,6 +75,7 @@ public class LocationsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Location create(@RequestBody final Location location) {
+        System.out.println(location);
         return  locationRepository.saveAndFlush(location);
     }
 

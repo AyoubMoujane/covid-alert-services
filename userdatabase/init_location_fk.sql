@@ -11,7 +11,7 @@ CREATE TABLE locations(
                           location_id serial PRIMARY KEY,
                           latitude numeric(18, 16) NOT NULL,
                           longitude numeric(18, 16) NOT NULL,
-                          location_date timestamp without time zone NOT NULL,
+                          location_date timestamp with time zone NOT NULL,
                           user_id integer,
                           CONSTRAINT fk_user
                               FOREIGN KEY(user_id)
