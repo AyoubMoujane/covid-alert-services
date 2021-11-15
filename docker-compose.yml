@@ -80,3 +80,8 @@ services:
       - "3001:3001"
     depends_on:
       - covid-location-db
+
+  config-server:
+    image: configserver:0.0.1-SNAPSHOT
+    ports:
+      - "8888:8888"
