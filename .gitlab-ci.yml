@@ -31,13 +31,13 @@ discoveryserver:
       - pipelineGitlabCiCd-pierre
       - discoveryserver/**/*
 
-#apigatewayservice:
-#  stage: trigger-microservices-pipelines
-#  trigger:
-#    include: apigatewayservice/.gitlab-ci.yml
-#    strategy: depend
-#  only:
-#    changes:
-#      - pipelineGitlabCiCd-pierre
-#      - apigatewayservice/**/*
-#
+apigatewayservice:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: apigatewayservice/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - pipelineGitlabCiCd-pierre
+      - apigatewayservice/**/*
+
