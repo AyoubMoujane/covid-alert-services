@@ -1,0 +1,12 @@
+stages:
+  - trigger-microservices-pipelines
+
+userservice:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: userservice/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - userservice/**/*
+
