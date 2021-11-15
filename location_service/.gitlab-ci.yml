@@ -33,7 +33,7 @@ build-microservice-jar:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
   script:
-    - ls -l userservice/
+    - ls -l location_service/
     - ./gradlew location_service:bootJar
     - ls -l location_service/build/libs/
   artifacts:
@@ -47,7 +47,7 @@ build-docker-image:
 
   script:
     - echo "Building image..."
-    - ls -l userservice/build/libs/
+    - ls -l location_service/build/libs/
     - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./location_service
     - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
     - echo "Pushing image..."
