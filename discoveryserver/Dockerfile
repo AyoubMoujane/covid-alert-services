@@ -3,5 +3,4 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 #ARG JAR_FILE
 COPY build/libs/discoveryserver-0.0.1.jar app.jar
-
 ENTRYPOINT ["java","-jar","app.jar"]
