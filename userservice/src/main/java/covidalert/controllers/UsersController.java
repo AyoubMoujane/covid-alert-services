@@ -31,10 +31,10 @@ public class UsersController {
         return userResource.list();
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public UserRepresentation get(@PathVariable String username) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public UserRepresentation get(@PathVariable String id) {
         // TODO : error handling when user doesn't exist
-        return userResource.search(username).get(0);
+        return userResource.get(id).toRepresentation();
     }
 
     @PostMapping
