@@ -1,21 +1,4 @@
-server:
-  port: 5001
-eureka:
-  client:
-    serviceUrl:
-      # Docker
-      defaultZone: http://discovery-service:8761/eureka/
-      # Manual gradle version
-      # defaultZone: http://localhost:8761/eureka/
 spring:
-  cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedHeaders:
-              - content-type
-            allowedMethods:
-              - GET
-              - POST
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
