@@ -18,7 +18,6 @@ location_service:
     strategy: depend
   only:
     changes:
-      - pipelineGitlabCiCd-pierre
       - location_service/**/*
 
 discoveryserver:
