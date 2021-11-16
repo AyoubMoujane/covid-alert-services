@@ -38,7 +38,8 @@ dependencies {
         exclude group: 'javax.ws.rs', module: 'jsr311-api'
     }
 
-
+    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3'
 
 }
 
