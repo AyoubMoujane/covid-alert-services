@@ -7,7 +7,7 @@ userservice:
     include: userservice/.gitlab-ci.yml
     strategy: depend
   only:
-    - master
     changes:
+      - master
       - userservice/**/*
 
