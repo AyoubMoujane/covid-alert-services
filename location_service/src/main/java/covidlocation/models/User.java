@@ -1,11 +1,15 @@
 package covidlocation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name="users")
+@Entity
 @Access(AccessType.FIELD)
+@Table(name= "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +28,13 @@ public class User {
 
 
 
-    @ManyToMany
-    @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="location_id"))
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Location> locations;
+
+   /* @OneToMany
+    @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="location_id"))
+    private List<Location> locations;*/
 
 
     public long getUser_id() {

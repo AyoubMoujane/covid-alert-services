@@ -58,7 +58,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
     volumes:
-      - ./userdatabase/init_location.sql:/docker-entrypoint-initdb.d/init_location.sql
+      - ./userdatabase/init_location_fk.sql:/docker-entrypoint-initdb.d/init_location_fk.sql
     command: -p 6002
 
   user-service:
@@ -80,3 +80,13 @@ services:
       - "3001:3001"
     depends_on:
       - covid-location-db
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"

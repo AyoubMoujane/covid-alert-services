@@ -2,16 +2,18 @@ package covidlocation.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import covidlocation.models.Location;
+import covidlocation.models.User;
 import covidlocation.repositories.LocationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/locations")
@@ -19,14 +21,59 @@ import java.util.List;
 
 public class LocationsController {
 
+    private String USER_SERVICE_URL = "http://localhost:5001/users";
+
     @Autowired
     private LocationRepository locationRepository;
 
-    /*@RequestMapping("byUsers/{id}")
-    public List<Location> byUser(@PathVariable long id) {
-        return locationRepository.findAllByUsersOrderByLocation_date(id);
+    @RequestMapping("by_user/{id}")
+    public List<Location> byUser(@PathVariable("id") long id) {
+        System.out.println("coucou");
+
+        try {
+            return locationRepository.getUserLocation(id);
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw exception;
+
+        }
     }
-    */
+
+    @PostMapping
+    @RequestMapping("/near_users")
+    public Set<Integer> getNearUser(@RequestBody final List<Location> location) {
+        System.out.println(location);
+        try {
+            System.out.println(locationRepository.getNearUser(location));
+            return locationRepository.getNearUser(location);
+        }
+        catch (Exception exception) {
+            System.out.println("Error in getNearUser");
+            System.out.println(exception.getMessage());
+            throw exception;
+
+        }
+    }
+
+
+    @RequestMapping("users_at_risk/{id}")
+    public Set<Integer> getUsersAtRisk(@PathVariable("id") long id) {
+
+        try {
+            List<Location> locations = new ArrayList<>();
+            locations = locationRepository.getUserLocation(id);
+            return locationRepository.getNearUser(locations);
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw exception;
+
+        }
+    }
+
+
+
 
     @GetMapping
     public List<Location> list() {
@@ -45,7 +92,9 @@ public class LocationsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Location create(@RequestBody final Location location) {
+    public Location create(@RequestBody Location location) {
+        User user = locationRepository.getUser(location.getUser().getUser_id());
+        location.setUser(user);
         return  locationRepository.saveAndFlush(location);
     }
 
