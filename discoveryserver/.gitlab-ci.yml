@@ -48,7 +48,7 @@ build-docker-image:
   script:
     - echo "Building image..."
     - ls -l discoveryserver/build/libs/
-    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./location_service
+    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./discoveryserver
     - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
     - echo "Pushing image..."
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
