@@ -13,7 +13,7 @@ services:
 stages:
   - build-jar
   - build-image
-#  - deploy-image
+  - deploy-image
 
 before_script:
   - docker --version
