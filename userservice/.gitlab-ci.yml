@@ -61,7 +61,9 @@ deploy-docker-image:
   script:
     - echo "Registering new container definition..."
     - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --cli-input-json file://userservice/userservice-task-definition.json
-    - echo "Updating the service..."
-    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
+    - echo "Run the Task"
+#    - aws ecs run-task --cluster $CLUSTER_NAME task-definition $TASK_DEFINITION_NAME
+#    - echo "Updating the service..."
+#    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
   only:
     - pipelineGitlabCiCd-pierre
