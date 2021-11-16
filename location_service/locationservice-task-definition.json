@@ -1,0 +1,40 @@
+{
+  "executionRoleArn": "arn:aws:iam::961822111490:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/locationservice_task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": [],
+      "portMappings": [
+        {
+          "hostPort": 4000,
+          "protocol": "tcp",
+          "containerPort": 4000
+        }
+      ],
+      "command": [],
+      "cpu": 0,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "memoryReservation": 256,
+      "image": "961822111490.dkr.ecr.us-east-1.amazonaws.com/covid-alert-services:location_service",
+      "name": "locationservice"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "family": "locationservice_task",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256",
+  "volumes": []
+}
