@@ -6,8 +6,10 @@ import covidlocation.models.User;
 import covidlocation.repositories.LocationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -21,7 +23,9 @@ import java.util.Set;
 
 public class LocationsController {
 
-    private String USER_SERVICE_URL = "http://localhost:5001/users";
+    @Autowired
+    private RestService restService;
+
 
     @Autowired
     private LocationRepository locationRepository;
@@ -93,9 +97,12 @@ public class LocationsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Location create(@RequestBody Location location) {
+
         User user = locationRepository.getUser(location.getUser().getUser_id());
         location.setUser(user);
         return  locationRepository.saveAndFlush(location);
+
+
     }
 
     @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
