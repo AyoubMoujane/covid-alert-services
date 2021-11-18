@@ -99,3 +99,10 @@ services:
       - "5050:80"
 
 
+  kafka-service:
+    image: kafka_service:0.0.1
+    ports:
+      - "9000:9000"
+
+
+
