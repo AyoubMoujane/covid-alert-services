@@ -23,6 +23,12 @@ public class CovidTest {
     private String user_id;
 
 
+    public long getCovidtest_id() {
+        return covidtest_id;
+    }
+    public void setCovidtest_id(long covidtest_id) {
+        this.covidtest_id = covidtest_id;
+    }
 
     public String getCovidtest_type() {
         return covidtest_type;
