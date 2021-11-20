@@ -22,7 +22,7 @@ public class VaccinationRepositoryImpl implements VaccinationCustomRepository{
         return query.getResultList();
     }
     @Override
-    public boolean isUserVaccineted (String id) {
+    public boolean isVaccineted (String id) {
         boolean isVaccineted = false;
         List vaccines = getUserVaccination(id);
         int nbOfVaccines = vaccines.size();
@@ -36,7 +36,7 @@ public class VaccinationRepositoryImpl implements VaccinationCustomRepository{
         List<String> userNotVaccinated = new ArrayList<>();
         for (int i = 0; i<users.size(); i++){
             String user = users.get(i);
-            if (!isUserVaccineted(user)){
+            if (!isVaccineted(user)){
                 userNotVaccinated.add(user);
             }
         }

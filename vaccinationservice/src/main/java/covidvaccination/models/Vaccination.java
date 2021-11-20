@@ -37,7 +37,7 @@ public class Vaccination {
         this.vaccination_id = vaccination_id;
     }
 
-    public String getVaccine_name_name() {
+    public String getVaccine_name() {
         return vaccine_name;
     }
 
