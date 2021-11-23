@@ -78,6 +78,9 @@ public class CovidTestControllerTest {
         // Set up the mock service
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
+        System.out.println("###########");
+        System.out.println(timestamp.toString());
+        System.out.println("###########");
         CovidTest mockCovidTest = new CovidTest("PCR", "positif", 72, timestamp, "1");
         CovidTest postCovidTest = new CovidTest("PCR", "positif", 72, timestamp, "1");
         doReturn(mockCovidTest).when(service).addCovidTest(any());
