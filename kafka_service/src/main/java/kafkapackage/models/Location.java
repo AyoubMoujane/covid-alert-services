@@ -10,14 +10,18 @@ public class Location {
     private long location_id;
     private long latitude;
     private long longitude;
-    private Timestamp location_date;
+//    private Timestamp location_date;
 
 
     public Location(long location_id, long latitude, long longitude, Timestamp location_date) {
         this.location_id = location_id;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.location_date = location_date;
+//        this.location_date = location_date;
+    }
+
+    public Location() {
+
     }
 
     public long getLocation_id() {
@@ -44,13 +48,13 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public Timestamp getLocation_date() {
-        return location_date;
-    }
-
-    public void setLocation_date(Timestamp location_date) {
-        this.location_date = location_date;
-    }
+//    public Timestamp getLocation_date() {
+//        return location_date;
+//    }
+//
+//    public void setLocation_date(Timestamp location_date) {
+//        this.location_date = location_date;
+//    }
 
     @Override
     public String toString() {
@@ -58,7 +62,7 @@ public class Location {
                 "location_id=" + location_id +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", location_date=" + location_date +
+//                ", location_date=" + location_date +
                 '}';
     }
 }
