@@ -1,11 +1,13 @@
 package covidtest.services;
 
+import com.google.gson.GsonBuilder;
 import covidtest.models.PositiveUser;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import com.google.gson.Gson;
 
 @Service
 public class Producer {
@@ -14,7 +16,10 @@ public class Producer {
     private KafkaTemplate<String, Object> kafkaLocationTemplate;
 
     public void sendPositiveUserMessage(PositiveUser positiveUser){
-        this.kafkaLocationTemplate.send(TOPIC,positiveUser);
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        String json = gson.toJson(positiveUser);
+        this.kafkaLocationTemplate.send(TOPIC,json);
     }
 
     @Bean
