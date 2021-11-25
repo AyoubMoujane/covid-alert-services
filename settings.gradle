@@ -1,5 +1,4 @@
 rootProject.name = 'covid-alert-backend'
 
-include 'userservice', 'userdatabase', 'apigatewayservice', 'discoveryserver','location_service', 'configserver'
-include 'kafka_service'
+include 'userservice', 'userdatabase', 'apigatewayservice', 'discoveryserver','location_service', 'configserver', 'vaccinationservice','covidtestservice','kafka_service'
 

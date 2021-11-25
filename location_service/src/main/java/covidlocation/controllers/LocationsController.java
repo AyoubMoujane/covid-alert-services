@@ -94,16 +94,16 @@ public class LocationsController {
         return locationRepository.findById(id).get();
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Location create(@RequestBody Location location) {
-
-        User user = locationRepository.getUser(location.getUser().getUser_id());
-        location.setUser(user);
-        return  locationRepository.saveAndFlush(location);
-
-
-    }
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Location create(@RequestBody Location location) {
+//
+//        User user = locationRepository.getUser(location.getUser().getUser_id());
+//        location.setUser(user);
+//        return  locationRepository.saveAndFlush(location);
+//
+//
+//    }
 
     @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
