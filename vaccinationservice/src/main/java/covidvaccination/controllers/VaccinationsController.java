@@ -68,7 +68,7 @@ public class VaccinationsController {
     @PostMapping("post_message")
     @ResponseStatus(HttpStatus.CREATED)
     public void createNotification() {
-        producer.sendUserAlert(new UserAlert(243));
+        producer.sendUserAlert(new UserAlert("243"));
     }
 
 }
