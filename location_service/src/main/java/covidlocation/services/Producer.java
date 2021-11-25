@@ -1,8 +1,8 @@
-package kafkapackage.services;
+package covidlocation.services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import kafkapackage.models.Location;
+import covidlocation.models.Location;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,17 +15,7 @@ public class Producer {
     @Autowired
     private KafkaTemplate<String, Object> kafkaLocationTemplate;
 
-    /*@Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
 
-
-
-
-    public void sendMessage(String message){
-        this.kafkaTemplate.send(TOPIC,message);
-    }
-
-     */
 
     public void sendLocation(Location location){
         this.kafkaLocationTemplate.send("location_topic",location);
