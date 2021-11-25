@@ -1,4 +1,4 @@
-package com.example.notificationservice;
+package com.example.notificationservice.services;
 
 import com.example.notificationservice.model.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;

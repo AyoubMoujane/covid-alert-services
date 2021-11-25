@@ -1,6 +1,6 @@
 package com.example.notificationservice.controller;
 
-import com.example.notificationservice.WSService;
+import com.example.notificationservice.services.WSService;
 import com.example.notificationservice.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
