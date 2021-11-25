@@ -1,6 +1,7 @@
 package covidtest.services;
 
 import covidtest.models.CovidTest;
+import covidtest.models.PositiveUser;
 import covidtest.repositories.CovidTestRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,15 @@ import java.util.List;
 @Service
 @Transactional
 public class CovidTestService {
+
     private CovidTestRepository covidTestRepository;
 
+    private final Producer producer;
+
     @Autowired
-    public CovidTestService(CovidTestRepository covidTestRepository){
+    public CovidTestService(CovidTestRepository covidTestRepository, Producer producer){
         this.covidTestRepository = covidTestRepository;
+        this.producer = producer;
     }
 
     public CovidTest addCovidTest(CovidTest covidTest){
@@ -65,5 +70,31 @@ public class CovidTestService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID "+id+" not found");
         }
     }
+
+    public boolean covidTestPositif(CovidTest covidTest){
+        boolean result = false;
+        System.out.println(covidTest.getCovidtest_result());
+        if (covidTest.getCovidtest_result().equals("positif")){
+            result = true;
+        }
+        return result;
+    }
+
+    public void verificationCovidTest(CovidTest covidTest){
+        System.out.println("verificationCovidTest");
+        System.out.println(covidTest);
+        boolean testPositif = covidTestPositif(covidTest);
+
+        if (testPositif){
+            System.out.println("positif");
+            PositiveUser positiveUser = new PositiveUser(covidTest.getUser_id());
+            System.out.println(positiveUser);
+            producer.sendPositiveUserMessage(positiveUser);
+        }
+    }
+
+//    public void post (PositiveUser positiveUser){
+//        producer.sendPositiveUserMessage(positiveUser);
+//    }
 
 }

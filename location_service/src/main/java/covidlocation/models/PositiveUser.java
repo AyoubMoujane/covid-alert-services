@@ -3,19 +3,19 @@ package covidlocation.models;
 
 public class PositiveUser {
 
-    private long user_id;
+    private String user_id;
 
-    public PositiveUser(long user_id) {
+    public PositiveUser(String user_id) {
         this.user_id = user_id;
     }
 
     public PositiveUser() {}
 
-    public long getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(long user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

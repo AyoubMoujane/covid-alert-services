@@ -11,15 +11,10 @@ public class CovidTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long covidtest_id;
-    @NotBlank
     private String covidtest_type;
-    @NotBlank
     private String covidtest_result;
-    @NotBlank
     private int covidtest_valid_duration;
-    @NotBlank
     private Timestamp covidtest_date;
-    @NotBlank
     private String user_id;
 
 

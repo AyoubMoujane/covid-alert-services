@@ -19,6 +19,7 @@ public class Producer {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         String json = gson.toJson(positiveUser);
+        System.out.println("send message : "+ json);
         this.kafkaLocationTemplate.send(TOPIC,json);
     }
 
