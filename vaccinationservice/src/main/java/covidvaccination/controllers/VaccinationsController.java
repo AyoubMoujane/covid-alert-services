@@ -1,7 +1,9 @@
 package covidvaccination.controllers;
 
+import covidvaccination.models.UserAlert;
 import covidvaccination.models.Vaccination;
 import covidvaccination.repositories.VaccinationRepository;
+import covidvaccination.services.Producer;
 import covidvaccination.services.VaccinationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,10 @@ public class VaccinationsController {
     @Autowired
     private final VaccinationService vaccinationService;
 
-    public VaccinationsController(VaccinationService vaccinationService) {
+    private final Producer producer;
+
+    public VaccinationsController(VaccinationService vaccinationService, Producer producer) {
+        this.producer = producer;
         this.vaccinationService = vaccinationService;
     }
 
@@ -60,9 +65,10 @@ public class VaccinationsController {
         return vaccinationService.isUserVaccinated(id);
     }
 
-
-
-
-
+    @PostMapping("post_message")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createNotification() {
+        producer.sendUserAlert(new UserAlert(243));
+    }
 
 }

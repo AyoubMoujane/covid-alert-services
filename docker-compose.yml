@@ -103,6 +103,13 @@ services:
     depends_on:
       - covid-vaccination-db
 
+  notification-service:
+    image: notificationservice:0.0.1-SNAPSHOT
+    ports:
+      - "7001:7001"
+    depends_on:
+      - kafka
+
   covid-test-db:
     image: postgres:alpine
     restart: unless-stopped
@@ -141,7 +148,7 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "test_topic:1:3,PositiveUsersTopic:1:3"
+      KAFKA_CREATE_TOPICS: "test_topic:1:3,PositiveUsersTopic:1:3,UserAlertTopic:1:3"
 
   kafka-service:
     image: kafka_service:0.0.1
