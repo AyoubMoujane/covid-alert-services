@@ -1,7 +1,7 @@
 package com.example.notificationservice.config;
 
-import com.example.notificationservice.UserHandshakeHandler;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -11,18 +11,28 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+//    @Override
+//    public void configureMessageBroker(MessageBrokerRegistry config) {
+//        config.enableSimpleBroker("/topic");
+//        config.setApplicationDestinationPrefixes("/ws");
+//    }
+
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
-        config.setApplicationDestinationPrefixes("/ws");
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("queue");
+        registry.setApplicationDestinationPrefixes("/ws");
+        registry.setUserDestinationPrefix("/users");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // TODO: add to properties
-        registry.addEndpoint("/our-websocket").setAllowedOrigins("http://localhost:3000")
-                .setHandshakeHandler(new UserHandshakeHandler())
+        registry.addEndpoint("/alerts")
+                .setAllowedOrigins("http://localhost:3000")
                 .withSockJS();
     }
 
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new UserInterceptor());
+    }
 }

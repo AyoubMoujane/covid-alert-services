@@ -1,22 +1,32 @@
 package com.example.notificationservice.services;
 
+import com.example.notificationservice.model.Message;
 import com.example.notificationservice.model.ResponseMessage;
+import com.example.notificationservice.model.UserAlert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WSService {
 
-    private final SimpMessagingTemplate messagingTemplate;
-
     @Autowired
-    public WSService(SimpMessagingTemplate messagingTemplate) {
-        this.messagingTemplate = messagingTemplate;
-    }
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     public void notifyFrontend(final String message) {
         ResponseMessage response = new ResponseMessage(message);
-        messagingTemplate.convertAndSend("/topic/messages", response);
+        simpMessagingTemplate.convertAndSend("/topic/messages", response);
     }
+
+    public void notifyUsersAtRisk(List<UserAlert> usersAtRisk) {
+        String message = "Vous récemment été en contact avec une personne testée positive à la COVID-19";
+
+        for(UserAlert userAlert : usersAtRisk) {
+            simpMessagingTemplate.convertAndSendToUser(userAlert.getUser_id(),"/queue/messages", new Message(message));
+        }
+
+    }
+
 }
