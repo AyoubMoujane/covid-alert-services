@@ -62,13 +62,13 @@ public class VaccinationsController {
 
     @RequestMapping("is_vaccinated/{id}")
     public boolean isVaccinated (@PathVariable("id") String id){
-        return vaccinationService.isUserVaccinated(id);
+        return vaccinationService.isUserFullVaccinated(id);
     }
 
-    @PostMapping("post_message")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createNotification() {
-        producer.sendUserAlert(new UserAlert("243"));
-    }
+//    @PostMapping("post_message")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void createNotification() {
+//        producer.sendUserAlert(new UserAlert("243"));
+//    }
 
 }
