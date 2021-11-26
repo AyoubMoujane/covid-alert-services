@@ -127,6 +127,11 @@ services:
     depends_on:
       - covid-test-db
 
+  news-service:
+    image: newsservice:0.0.1-SNAPSHOT
+    ports:
+      - "4001:4001"
+
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4

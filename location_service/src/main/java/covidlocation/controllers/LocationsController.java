@@ -138,10 +138,9 @@ public class LocationsController {
     public void sendUser() {
         List<UserAtRisk> listUserAtRisks = new ArrayList<>();
 
-        listUserAtRisks.add(new UserAtRisk("1"));
-        listUserAtRisks.add(new UserAtRisk("2"));
-        listUserAtRisks.add(new UserAtRisk("3"));
-        listUserAtRisks.add(new UserAtRisk("4"));
+        listUserAtRisks.add(new UserAtRisk("482060c3-0446-4df5-bc9b-3d05ff175acb"));
+        listUserAtRisks.add(new UserAtRisk("8f02f183-e899-4070-b383-61c8ccc02e7b"));
+
         producer.sendUserAtRiskMessage(listUserAtRisks);
     }
 
