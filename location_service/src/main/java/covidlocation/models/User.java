@@ -36,6 +36,11 @@ public class User {
     @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="location_id"))
     private List<Location> locations;*/
 
+    public User(long user_id, String first_name) {
+        this.user_id = user_id;
+        this.first_name = first_name;
+    }
+    public User(){}
 
     public long getUser_id() {
         return user_id;
@@ -93,4 +98,15 @@ public class User {
         this.locations = locations;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

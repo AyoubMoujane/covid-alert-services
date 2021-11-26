@@ -36,7 +36,7 @@ public class KafkaController {
     public void sendMessageToKafkaTopic(@RequestBody final Location location) {
         System.out.println(location);
         try {
-            this.producer.saveCreateLocationLog(location);
+            this.producer.sendLocationMessage(location);
         }
         catch (Exception exception) {
             System.out.println("Error in getNearUser");
