@@ -14,6 +14,8 @@ public interface LocationCustomRepository {
     List<Integer> getNearUserByLocation(Location location);
     Set<Integer> getNearUser(List<Location> location);
     User getUser(long id);
+    Set<Long> getNearUserKafka(List<Location> locations);
+    List<Location> getUserLocationFromKafka(long id);
 
 
 }

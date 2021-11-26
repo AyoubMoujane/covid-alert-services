@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class LocationRepositoryImpl implements LocationCustomRepository {
 
@@ -65,6 +67,41 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
         query.setParameter("id", id);
         return query.getSingleResult();
     }
+
+
+    /* Code pour kafka */
+
+    public List<Location> locations ;
+
+
+    public List<Location> getUserLocationFromKafka(long id) {
+        Predicate<Location> byLocation = location -> location.getUser().getUser_id() == id;
+        List<Location> result = locations.stream().filter(byLocation)
+                .collect(Collectors.toList());
+
+        return result;
+
+    }
+
+    public List<Long> getNearUserByLocationKafka(Location location) {
+        List<Long> users = new ArrayList<>();
+        for (Location loc :locations){
+            if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME))
+                users.add(location.getUser().getUser_id());
+        }
+        return  users;
+    }
+
+    public Set<Long> getNearUserKafka(List<Location> locations) {
+        Set<Long> nearUsers = new LinkedHashSet<>();
+        for (Location location :locations){
+            nearUsers.addAll(this.getNearUserByLocationKafka(location));
+        }
+        return nearUsers;
+    }
+
+
+
 
 
 }

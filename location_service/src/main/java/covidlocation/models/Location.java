@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -18,7 +21,14 @@ public class Location {
     private long longitude;
     private Timestamp location_date;
 
-
+    public Location(long location_id, long latitude, long longitude, Timestamp location_date, User user) {
+        this.location_id = location_id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location_date = location_date;
+        this.user = user;
+    }
+    public Location(){}
 
 
     /*@ManyToOne
@@ -71,6 +81,30 @@ public class Location {
 
     public void setLocation_date(Timestamp location_date) {
         this.location_date = location_date;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "location_id=" + location_id +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", location_date=" + location_date +
+                ", user=" + user +
+                '}';
+    }
+
+    public boolean isCloseto(Location loc, float radius)  {
+        return Math.pow(loc.getLatitude()-this.getLatitude(),2) + Math.pow(loc.getLongitude()-this.getLongitude(),2) < Math.pow(radius,2);
+    }
+
+    public boolean isMoreRecentThan(long contagionTime)  {
+        LocalDateTime now = LocalDateTime.now();
+
+        //long diff = ChronoUnit.DAYS.between(now, this.location_date.toLocalDateTime());
+        long daysBetween = Duration.between(now, this.location_date.toLocalDateTime()).toDays();
+
+        return daysBetween < contagionTime;
     }
 
 
