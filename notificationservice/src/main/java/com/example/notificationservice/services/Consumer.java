@@ -30,10 +30,7 @@ public class Consumer {
         try {
             List<UserAlert> listUserAlert = gson.fromJson(json, listOfUserAtRisk);
             System.out.println("List User Alert " + listUserAlert);
-            for (UserAlert userAlert: listUserAlert){
-                System.out.println(userAlert.getMessage());
-                service.notifyFrontend(userAlert.getMessage());
-            }
+            service.notifyUsersAtRisk(listUserAlert);
         } catch(Exception e) {
             System.out.println(e);
         }
