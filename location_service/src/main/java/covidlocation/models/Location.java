@@ -28,6 +28,8 @@ public class Location {
         this.location_date = location_date;
         this.user = user;
     }
+    public Location(){}
+
 
     /*@ManyToOne
     @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="location_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
@@ -104,8 +106,6 @@ public class Location {
 
         return daysBetween < contagionTime;
     }
-    public static void main(String[] args) {
 
-    }
 
 }

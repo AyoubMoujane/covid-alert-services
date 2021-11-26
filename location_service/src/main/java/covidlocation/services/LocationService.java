@@ -113,8 +113,9 @@ public class LocationService {
 
         List<Long> users = new ArrayList<>();
         for (Location loc :locations){
-            if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME))
-                users.add(location.getUser().getUser_id());
+           if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME)) {
+               users.add(loc.getUser().getUser_id());
+           }
         }
         System.out.println("getNearUserByLocationKafka : " + users.toString());
         return  users;
