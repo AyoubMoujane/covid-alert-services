@@ -3,7 +3,9 @@ package covidlocation.controllers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import covidlocation.models.Location;
 import covidlocation.models.User;
+import covidlocation.models.UserAtRisk;
 import covidlocation.repositories.LocationRepository;
+import covidlocation.services.Producer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -29,6 +31,12 @@ public class LocationsController {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    private final Producer producer;
+
+    public LocationsController(Producer producer) {
+        this.producer = producer;
+    }
 
     @RequestMapping("by_user/{id}")
     public List<Location> byUser(@PathVariable("id") long id) {
@@ -123,6 +131,18 @@ public class LocationsController {
         Location existingUser = locationRepository.findById(id).get();
         BeanUtils.copyProperties(location,existingUser,"location_id");
         return locationRepository.saveAndFlush(existingUser);
+    }
+
+    @PostMapping("post_message")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void sendUser() {
+        List<UserAtRisk> listUserAtRisks = new ArrayList<>();
+
+        listUserAtRisks.add(new UserAtRisk("1"));
+        listUserAtRisks.add(new UserAtRisk("2"));
+        listUserAtRisks.add(new UserAtRisk("3"));
+        listUserAtRisks.add(new UserAtRisk("4"));
+        producer.sendUserAtRiskMessage(listUserAtRisks);
     }
 
 
