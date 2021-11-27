@@ -72,8 +72,7 @@ deploy-docker-image:
     - chmod 400 ~/.ssh/ssh-key.pem
     - cat ~/.ssh/ssh-key.pem
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - apt-get update -y
-    - apt-get -y install rsync
+
   script:
     - ssh -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
     - ls -l
