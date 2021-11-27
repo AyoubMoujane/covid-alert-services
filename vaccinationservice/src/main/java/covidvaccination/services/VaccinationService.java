@@ -97,7 +97,7 @@ public class VaccinationService {
         ArrayList<UserAlert> listUserAlert = new ArrayList<>();
 
         for (UserAtRisk userAtRisk : listUserAtRisk){
-            listUserAlert.add(new UserAlert(userAtRisk.getUser_id()));
+            listUserAlert.add(new UserAlert(userAtRisk.getUser_id(),userAtRisk.getLocation_date()));
         }
 
         return listUserAlert;

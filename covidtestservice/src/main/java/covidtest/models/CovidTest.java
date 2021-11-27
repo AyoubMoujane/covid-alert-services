@@ -68,11 +68,11 @@ public class CovidTest {
     protected CovidTest(){}
 
     public CovidTest(String covidtest_type, String covidtest_result, int covidtest_valid_duration, Timestamp covidtest_date, String user_id) {
-        this.covidtest_type = covidtest_type;
-        this.covidtest_result = covidtest_result;
-        this.covidtest_valid_duration = covidtest_valid_duration;
-        this.covidtest_date = covidtest_date;
-        this.user_id = user_id;
+            this.covidtest_type = covidtest_type;
+            this.covidtest_result = covidtest_result;
+            this.covidtest_valid_duration = covidtest_valid_duration;
+            this.covidtest_date = covidtest_date;
+            this.user_id = user_id;
     }
 
     @Override

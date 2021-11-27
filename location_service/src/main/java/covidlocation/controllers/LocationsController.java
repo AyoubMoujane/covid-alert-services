@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -65,13 +67,13 @@ public class LocationsController {
     }
 
     @RequestMapping("by_user/{id}")
-    public List<Location> byUser(@PathVariable("id") long id) {
+    public List<Location> byUser(@PathVariable("id") String id) {
         return locationService.findLocationByUser(id);
     }
-
+/*
     @PostMapping
     @RequestMapping("/near_users")
-    public Set<Integer> getNearUser(@RequestBody final List<Location> location) {
+    public Set<String> getNearUser(@RequestBody final List<Location> location) {
         System.out.println(location);
         try {
             System.out.println(locationRepository.getNearUser(location));
@@ -86,10 +88,6 @@ public class LocationsController {
     }
 
 
-    @RequestMapping("test/{id}/{MAX_DISTANCE}/{CONTAGION_TIME}")
-    public Set<Long> getUsersAtRisk(@PathVariable("id") long id,@PathVariable("MAX_DISTANCE") long MAX_DISTANCE,@PathVariable("CONTAGION_TIME") long CONTAGION_TIME) {
-        return locationService.findUsersAtRisk(id,MAX_DISTANCE,CONTAGION_TIME);
-    }
 
     @PostMapping("post_message")
     @ResponseStatus(HttpStatus.CREATED)
@@ -100,7 +98,12 @@ public class LocationsController {
         listUserAtRisks.add(new UserAtRisk("8f02f183-e899-4070-b383-61c8ccc02e7b"));
 
         producer.sendUserAtRiskMessage(listUserAtRisks);
+
+    @RequestMapping("test/{id}")
+    public Set<UserAtRisk> getUsersAtRisk(@PathVariable("id") String id) {
+        return locationService.findUsersAtRisk(id);
     }
+ */
 
 
 

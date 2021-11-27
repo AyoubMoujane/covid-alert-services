@@ -1,6 +1,7 @@
 package covidlocation.services;
 
 import covidlocation.models.Location;
+import covidlocation.models.UserAtRisk;
 import covidlocation.repositories.LocationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class LocationService {
     private LocationRepository locationRepository;
     private final Producer producer;
     private final Consumer consumer;
+
+    //private final int MAX_DISTANCE = 20000;
+    //private final int CONTAGION_TIME = 7;
+
 
 
     @Autowired
@@ -73,7 +78,7 @@ public class LocationService {
         return locationRepository.saveAndFlush(existingUser);
     }
 
-    public List<Location> findLocationByUser(long id) {
+    public List<Location> findLocationByUser(String id) {
         try {
             return locationRepository.getUserLocation(id);
         }
@@ -82,12 +87,14 @@ public class LocationService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID "+id+" not found");
         }
     }
-
-    public Set<Long> findUsersAtRisk(long id,long MAX_DISTANCE,long CONTAGION_TIME) {
+/*
+    public Set<UserAtRisk> findUsersAtRisk(String id) {
         try {
             List<Location> locations = this.getUserLocationFromKafka(id);
             System.out.println("getUserLocationFromKafka :" + id + ", locations:"+ locations.toString());
-            Set<Long> usersAtRisk = this.getNearUserKafka(locations, MAX_DISTANCE, CONTAGION_TIME);
+            Set<UserAtRisk> usersAtRisk = this.getNearUserKafka(locations);
+            List<UserAtRisk> list = new ArrayList<UserAtRisk>( usersAtRisk );
+            producer.sendUserAtRiskMessage(list);
             return usersAtRisk;
         }
         catch (Exception exception) {
@@ -97,9 +104,9 @@ public class LocationService {
         }
     }
 
-    public List<Location> getUserLocationFromKafka(long id) {
+    public List<Location> getUserLocationFromKafka(String id) {
         List<Location> locations = consumer.getLocations();
-        Predicate<Location> byLocation = location -> location.getUser().getUser_id() == id;
+        Predicate<Location> byLocation = location -> location.getUser_id().equals(id) ;
         List<Location> result = locations.stream().filter(byLocation)
                 .collect(Collectors.toList());
 
@@ -107,27 +114,29 @@ public class LocationService {
 
     }
 
-    public List<Long> getNearUserByLocationKafka(Location location,long MAX_DISTANCE,long CONTAGION_TIME) {
+    public List<UserAtRisk> getNearUserByLocationKafka(Location location) {
         List<Location> locations = consumer.getLocations();
         System.out.println("consumer locations  : " + locations.toString());
 
-        List<Long> users = new ArrayList<>();
+        List<UserAtRisk> usersAtRisk = new ArrayList<>();
         for (Location loc :locations){
            if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME)) {
-               users.add(loc.getUser().getUser_id());
+               usersAtRisk.add(new UserAtRisk(loc.getUser_id(),loc.getLocation_date()));
            }
         }
-        System.out.println("getNearUserByLocationKafka : " + users.toString());
-        return  users;
+        System.out.println("getNearUserByLocationKafka : " + usersAtRisk.toString());
+        return  usersAtRisk;
     }
 
-    public Set<Long> getNearUserKafka(List<Location> locations,long MAX_DISTANCE,long CONTAGION_TIME) {
-        Set<Long> nearUsers = new LinkedHashSet<>();
+    public Set<UserAtRisk> getNearUserKafka(List<Location> locations) {
+        Set<UserAtRisk> nearUsers = new LinkedHashSet<>();
         for (Location location :locations){
-            nearUsers.addAll(this.getNearUserByLocationKafka(location,MAX_DISTANCE, CONTAGION_TIME));
+            nearUsers.addAll(this.getNearUserByLocationKafka(location));
         }
         return nearUsers;
     }
+
+ */
 
 
 
