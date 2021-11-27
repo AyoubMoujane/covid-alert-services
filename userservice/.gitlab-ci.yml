@@ -73,6 +73,7 @@ deploy-docker-image:
     - cat ~/.ssh/ssh-key.pem
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
+
   script:
     - ssh -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
     - ls -l
