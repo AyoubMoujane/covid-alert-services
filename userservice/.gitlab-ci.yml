@@ -67,9 +67,10 @@ deploy-docker-image:
     - echo $EC2_SSH_KEY >> ~/.ssh/ssh-key.pem
     - chmod 400 ~/.ssh/ssh-key.pem
     - cat ~/.ssh/ssh-key.pem
-
-
-
+  script:
+    - cat ~/.ssh/ssh-key.pem
+  only:
+    - prepare-cicd-pipeline-pierre
 
 #deploy-docker-image:
 #  stage: deploy-image
