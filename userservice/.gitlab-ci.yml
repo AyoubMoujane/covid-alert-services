@@ -3,7 +3,7 @@ variables:
   REPOSITORY_URL: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
   IMAGE_TAG: userservice
-  ARTIFACT_NAME: {project.artifactName}
+  ARTIFACT_NAME: project.artifactName
   TASK_DEFINITION_NAME: userservice_task
   CLUSTER_NAME: covidalert-microservices
 
