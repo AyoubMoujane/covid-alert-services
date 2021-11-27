@@ -61,12 +61,19 @@ before_script:
 deploy-docker-image:
   stage: deploy-image
   before_script:
+    - ls -la
+    - pwd
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo $EC2_SSH_KEY
     - echo $EC2_SSH_KEY >> ~/.ssh/ssh-key.pem
     - chmod 400 ~/.ssh/ssh-key.pem
     - cat ~/.ssh/ssh-key.pem
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - apt-get update -y
+    - apt-get -y install rsync
   script:
     - ssh -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
     - ls -l
