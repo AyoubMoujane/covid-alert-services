@@ -1,6 +1,7 @@
 variables:
   SERVICE_NAME: userservice
   REPOSITORY_URL: 961822111490.dkr.ecr.us-east-1.amazonaws.com
+  EC2_URL: ec2-54-242-158-115.compute-1.amazonaws.com
   APP_NAME: covid-alert-services
   IMAGE_TAG: userservice
   ARTIFACT_NAME: userservice-0.0.1.jar
@@ -13,7 +14,7 @@ services:
 stages:
   - build-jar
   - build-image
-#  - deploy-image
+  - deploy-image
 
 before_script:
   - docker --version
@@ -32,10 +33,10 @@ build-microservice-jar:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
-    - echo $SERVICE_NAME
+    - echo ${SERVICE_NAME}
   script:
     - ls -l $SERVICE_NAME/
-    - ./gradlew ${SERVICE_NAME}:bootJar
+    - ./gradlew userservice:bootJar
     - ls -l $SERVICE_NAME/build/libs/
   artifacts:
     paths:
@@ -55,6 +56,19 @@ build-docker-image:
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
     - prepare-cicd-pipeline-pierre
+
+
+deploy-docker-image:
+  stage: deploy-image
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $EC2_SSH_KEY
+    - echo $EC2_SSH_KEY >> ~/.ssh/ssh-key.pem
+    - chmod 400 ~/.ssh/ssh-key.pem
+    - cat ~/.ssh/ssh-key.pem
+
+
 
 
 #deploy-docker-image:
