@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class SendService {
-    private final int MAX_DISTANCE = 20000;
+    private final double MAX_DISTANCE = 0.0027; // 300 meters
     private final int CONTAGION_TIME = 7;
     private final Producer producer;
 
