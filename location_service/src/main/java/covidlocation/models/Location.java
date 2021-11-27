@@ -1,14 +1,11 @@
 package covidlocation.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 
 @Entity
@@ -17,12 +14,12 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long location_id;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private Timestamp location_date;
     private String user_id;
 
-    public Location(long location_id, long latitude, long longitude, Timestamp location_date, String user_id) {
+    public Location(long location_id, double latitude, double longitude, Timestamp location_date, String user_id) {
         this.location_id = location_id;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -39,19 +36,19 @@ public class Location {
         this.location_id = location_id;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -81,14 +78,14 @@ public class Location {
                 '}';
     }
 
-    public boolean isCloseto(Location loc, float radius)  {
+    public boolean isCloseto(Location loc, double radius)  {
         return Math.pow(loc.getLatitude()-this.getLatitude(),2) + Math.pow(loc.getLongitude()-this.getLongitude(),2) < Math.pow(radius,2);
     }
 
     public boolean isMoreRecentThan(long contagionTime)  {
         LocalDateTime now = LocalDateTime.now();
-        //long diff = ChronoUnit.DAYS.between(now, this.location_date.toLocalDateTime());
-        long daysBetween = Duration.between(now, this.location_date.toLocalDateTime()).toDays();
+        long daysBetween = ChronoUnit.DAYS.between(this.location_date.toLocalDateTime(),now);
+        //long daysBetween = Duration.between(now, this.location_date.toLocalDateTime()).toDays();
 
         return daysBetween < contagionTime;
     }

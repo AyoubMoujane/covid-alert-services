@@ -31,6 +31,7 @@ public class CovidTestControllerTest {
     @MockBean
     private CovidTestService service;
 
+    /*
     @Test
     @DisplayName("GET /covidtests/0 - Found")
     void testGetCovidTestByIdFound() throws Exception {
@@ -57,6 +58,8 @@ public class CovidTestControllerTest {
                 .andExpect(jsonPath("$.covidtest_valid_duration", is(72)))
                 .andExpect(jsonPath("$.user_id", is("1")));
     }
+    */
+
 
 //    @Test
 //    @DisplayName("GET /covidtests/0 - Not Found")
@@ -71,6 +74,7 @@ public class CovidTestControllerTest {
 //                .andExpect(status().isNotFound());
 //    }
 
+    /*
     @Test
     @DisplayName("Post /covidtests - Success")
     void testCreateCovidTest() throws Exception {
@@ -102,6 +106,8 @@ public class CovidTestControllerTest {
                 .andExpect(jsonPath("$.covidtest_valid_duration", is(72)))
                 .andExpect(jsonPath("$.user_id", is("1")));
     }
+
+     */
 
 //    @Test
 //    @DisplayName("Put /covidtests/0 - Success")

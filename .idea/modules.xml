@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/apigatewayservice/covid-alert-backend.apigatewayservice.iml" filepath="$PROJECT_DIR$/.idea/modules/apigatewayservice/covid-alert-backend.apigatewayservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/configserver/covid-alert-backend.configserver.iml" filepath="$PROJECT_DIR$/.idea/modules/configserver/covid-alert-backend.configserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/configserver/covid-alert-backend.configserver.test.iml" filepath="$PROJECT_DIR$/.idea/modules/configserver/covid-alert-backend.configserver.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covidtestservice/covid-alert-backend.covidtestservice.iml" filepath="$PROJECT_DIR$/.idea/modules/covidtestservice/covid-alert-backend.covidtestservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/covidtestservice/covid-alert-backend.covidtestservice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/covidtestservice/covid-alert-backend.covidtestservice.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discoveryserver/covid-alert-backend.discoveryserver.iml" filepath="$PROJECT_DIR$/.idea/modules/discoveryserver/covid-alert-backend.discoveryserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/location_service/covid-alert-backend.location_service.iml" filepath="$PROJECT_DIR$/.idea/modules/location_service/covid-alert-backend.location_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/newsservice/covid-alert-backend.newsservice.iml" filepath="$PROJECT_DIR$/.idea/modules/newsservice/covid-alert-backend.newsservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notificationservice/covid-alert-backend.notificationservice.iml" filepath="$PROJECT_DIR$/.idea/modules/notificationservice/covid-alert-backend.notificationservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vaccinationservice/covid-alert-backend.vaccinationservice.iml" filepath="$PROJECT_DIR$/.idea/modules/vaccinationservice/covid-alert-backend.vaccinationservice.iml" />
+    </modules>
+  </component>
+</project>
