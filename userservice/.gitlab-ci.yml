@@ -1,11 +1,11 @@
 variables:
+  SERVICE_NAME: userservice
   REPOSITORY_URL: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
   IMAGE_TAG: userservice
-  ARTIFACT_NAME: userservice-0.0.1.jar
+  ARTIFACT_NAME: {project.artifactName}
   TASK_DEFINITION_NAME: userservice_task
   CLUSTER_NAME: covidalert-microservices
-  SERVICE_NAME: userservice-service
 
 services:
   - docker:dind
@@ -33,12 +33,12 @@ build-microservice-jar:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
   script:
-    - ls -l userservice/
-    - ./gradlew userservice:bootJar
-    - ls -l userservice/build/libs/
+    - ls -l $SERVICE_NAME/
+    - ./gradlew $SERVICE_NAME:bootJar
+    - ls -l $SERVICE_NAME/build/libs/
   artifacts:
     paths:
-      - userservice/build/libs/*.jar
+      - $SERVICE_NAME/build/libs/*.jar
   only:
     - prepare-cicd-pipeline-pierre
 
@@ -47,13 +47,11 @@ build-docker-image:
 
   script:
     - echo "Building image..."
-    - ls -l userservice/build/libs/
-    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./userservice
+    - ls -l $SERVICE_NAME/build/libs/
+    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./$SERVICE_NAME
     - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
-    - aws ecr-public describe-image-tags --repository-name covid-alert-services --region ${AWS_DEFAULT_REGION}
-    - aws ecr-public batch-delete-image --repository-name covid-alert-services --image-ids imageTag=userservice --region ${AWS_DEFAULT_REGION}
-#    - echo "Pushing image..."
-#    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+    - echo "Pushing image..."
+    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
     - prepare-cicd-pipeline-pierre
 

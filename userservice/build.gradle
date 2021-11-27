@@ -14,9 +14,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('springCloudVersion', "2020.0.4")
-}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -64,4 +61,9 @@ dockerRun {
     image "${project.name}:${project.version}"
     ports '5001:5001'
     daemonize true
+}
+
+ext {
+    set('springCloudVersion', "2020.0.4")
+    set('artifactName',"${project.name}:${project.version}")
 }
