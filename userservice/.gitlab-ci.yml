@@ -32,9 +32,10 @@ build-microservice-jar:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
+    - echo $SERVICE_NAME
   script:
     - ls -l $SERVICE_NAME/
-    - ./gradlew $SERVICE_NAME:bootJar
+    - ./gradlew ${SERVICE_NAME}:bootJar
     - ls -l $SERVICE_NAME/build/libs/
   artifacts:
     paths:
