@@ -35,9 +35,7 @@ dependencies {
     implementation('org.springframework:spring-webmvc:5.3.10')
     implementation fileTree(dir: '../userservice/build/libs', include: ['*.jar'])
 
-    implementation ('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') {
-        exclude group: 'javax.ws.rs', module: 'jsr311-api'
-    }
+    implementation ('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 
     implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.3'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.3'

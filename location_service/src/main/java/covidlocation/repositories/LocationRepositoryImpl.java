@@ -17,23 +17,22 @@ import java.util.stream.Collectors;
 
 public class LocationRepositoryImpl implements LocationCustomRepository {
 
-    private final int MAX_DISTANCE = 20000;
     private final double COEFFICIENT = 69.1;
     private final double DENOMINATOR = 57.3;
-    private final int CONTAGION_TIME = 7;
+
 
     @PersistenceContext
     EntityManager entityManager;
     @Override
-    public List<Location> getUserLocation(long id) {
+    public List<Location> getUserLocation(String id) {
         String sql = "SELECT loc FROM Location loc Where user_id = :id";
         TypedQuery<Location> query = entityManager.createQuery(sql, Location.class);
         query.setParameter("id", id);
         return query.getResultList();
     }
-
+/*
     @Override
-    public List<Integer> getNearUserByLocation(Location location) {
+    public List<String> getNearUserByLocation(Location location) {
         String sql = "SELECT user_id FROM (SELECT user_id,longitude,latitude, SQRT( POW(:coefficient * (latitude - :start_latitude), 2) + POW(:coefficient * (:start_longitude - longitude) * COS(latitude / :denominator), 2)) AS distance,(CAST(now() as date) - CAST(location_date as date) ) AS nb_days FROM Locations ORDER BY distance) location_distance WHERE distance < :max_distance and nb_days< :contagion_time";
         String hql = "SELECT loc, SQRT( POW(69.1 * (latitude - :start_latitude), 2) + POW(69.1 * (:start_longitude - longitude) * COS(latitude / 57.3), 2)) AS distance FROM Locations loc WHERE distance < :max_distance ORDER BY distance";
         Query query = entityManager.createNativeQuery(sql);
@@ -51,8 +50,8 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
     }
 
     @Override
-    public Set<Integer> getNearUser(List<Location> locations) {
-        Set<Integer> nearUsers = new LinkedHashSet<>();
+    public Set<String> getNearUser(List<Location> locations) {
+        Set<String> nearUsers = new LinkedHashSet<>();
         for (Location location :locations){
             if (!this.getNearUserByLocation(location).isEmpty())
             nearUsers.addAll(this.getNearUserByLocation(location));
@@ -60,7 +59,8 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
         return nearUsers;
     }
 
-    @Override
+ */
+
     public User getUser(long id) {
         String sql = "SELECT us FROM User us Where user_id = :id";
         TypedQuery<User> query = entityManager.createQuery(sql, User.class);
@@ -74,8 +74,8 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
     public List<Location> locations ;
 
 
-    public List<Location> getUserLocationFromKafka(long id) {
-        Predicate<Location> byLocation = location -> location.getUser().getUser_id() == id;
+    public List<Location> getUserLocationFromKafka(String id) {
+        Predicate<Location> byLocation = location -> location.getUser_id() == id;
         List<Location> result = locations.stream().filter(byLocation)
                 .collect(Collectors.toList());
 
@@ -83,19 +83,19 @@ public class LocationRepositoryImpl implements LocationCustomRepository {
 
     }
 
-    public List<Long> getNearUserByLocationKafka(Location location) {
-        List<Long> users = new ArrayList<>();
+    public List<String> getNearUserByLocationKafka(Location location,long MAX_DISTANCE,long CONTAGION_TIME) {
+        List<String> users = new ArrayList<>();
         for (Location loc :locations){
             if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME))
-                users.add(location.getUser().getUser_id());
+                users.add(location.getUser_id());
         }
         return  users;
     }
 
-    public Set<Long> getNearUserKafka(List<Location> locations) {
-        Set<Long> nearUsers = new LinkedHashSet<>();
+    public Set<String> getNearUserKafka(List<Location> locations,long MAX_DISTANCE,long CONTAGION_TIME) {
+        Set<String> nearUsers = new LinkedHashSet<>();
         for (Location location :locations){
-            nearUsers.addAll(this.getNearUserByLocationKafka(location));
+            nearUsers.addAll(this.getNearUserByLocationKafka(location,MAX_DISTANCE,CONTAGION_TIME));
         }
         return nearUsers;
     }

@@ -20,36 +20,16 @@ public class Location {
     private long latitude;
     private long longitude;
     private Timestamp location_date;
+    private String user_id;
 
-    public Location(long location_id, long latitude, long longitude, Timestamp location_date, User user) {
+    public Location(long location_id, long latitude, long longitude, Timestamp location_date, String user_id) {
         this.location_id = location_id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.location_date = location_date;
-        this.user = user;
+        this.user_id = user_id;
     }
     public Location(){}
-
-
-    /*@ManyToOne
-    @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="location_id"),inverseJoinColumns = @JoinColumn(name="user_id"))
-    private User user;*/
-
-
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
 
     public long getLocation_id() {
         return location_id;
@@ -82,6 +62,13 @@ public class Location {
     public void setLocation_date(Timestamp location_date) {
         this.location_date = location_date;
     }
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     @Override
     public String toString() {
@@ -90,7 +77,7 @@ public class Location {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", location_date=" + location_date +
-                ", user=" + user +
+                ", user_id=" + user_id +
                 '}';
     }
 
@@ -100,7 +87,6 @@ public class Location {
 
     public boolean isMoreRecentThan(long contagionTime)  {
         LocalDateTime now = LocalDateTime.now();
-
         //long diff = ChronoUnit.DAYS.between(now, this.location_date.toLocalDateTime());
         long daysBetween = Duration.between(now, this.location_date.toLocalDateTime()).toDays();
 

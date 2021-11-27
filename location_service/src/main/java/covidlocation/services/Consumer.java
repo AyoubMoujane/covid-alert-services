@@ -2,6 +2,7 @@ package covidlocation.services;
 
 import covidlocation.models.Location;
 import covidlocation.models.PositiveUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;
@@ -14,10 +15,18 @@ import java.util.List;
 
 @Service
 public class Consumer {
-    private List<Location> locations = new ArrayList<>();
+    private static List<Location> locations = new ArrayList<>();
     private static final String TOPIC = "PositiveUsersTopic";
 
-    public List<Location> getLocations() {
+    @Autowired
+    private final SendService sendService;
+
+    public Consumer(SendService sendService) {
+        this.sendService = sendService;
+    }
+
+
+    public static List<Location> getLocations() {
         return locations;
     }
 
@@ -29,6 +38,7 @@ public class Consumer {
         try {
             PositiveUser positiveUser1 = gson.fromJson(json, PositiveUser.class);
             System.out.println("Casted received message" + positiveUser1.getUser_id());
+            sendService.findUsersAtRisk(positiveUser1.getUser_id(),this.getLocations());
 
         } catch(Exception e) {
             System.out.println(e);

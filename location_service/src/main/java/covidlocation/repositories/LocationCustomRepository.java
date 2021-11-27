@@ -10,12 +10,10 @@ import java.util.Set;
 @Repository
 public interface LocationCustomRepository {
 
-    List<Location> getUserLocation(long id);
-    List<Integer> getNearUserByLocation(Location location);
-    Set<Integer> getNearUser(List<Location> location);
-    User getUser(long id);
-    Set<Long> getNearUserKafka(List<Location> locations);
-    List<Location> getUserLocationFromKafka(long id);
+    List<Location> getUserLocation(String id);
+    //List<String> getNearUserByLocation(Location location);
+    //Set<String> getNearUser(List<Location> location);
+
 
 
 }

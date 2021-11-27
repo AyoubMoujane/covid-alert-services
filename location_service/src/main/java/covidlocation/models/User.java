@@ -28,14 +28,6 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Location> locations;
-
-   /* @OneToMany
-    @JoinTable(name="user_locations",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="location_id"))
-    private List<Location> locations;*/
-
     public User(long user_id, String first_name) {
         this.user_id = user_id;
         this.first_name = first_name;
@@ -90,13 +82,7 @@ public class User {
         this.password = password;
     }
 
-    public List<Location> getLocations() {
-        return locations;
-    }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
-    }
 
     @Override
     public String toString() {
