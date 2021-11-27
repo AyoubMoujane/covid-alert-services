@@ -1,8 +1,8 @@
 package covidvaccination.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name= "vaccinations")
@@ -12,21 +12,13 @@ public class Vaccination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long vaccination_id;
-    @NotBlank
     private String vaccine_name;
-    @NotBlank
     private String vaccine_type;
-    @NotBlank
     private String target_disease;
-    @NotBlank
     private String vaccination_center;
-    @NotBlank
     private String country;
-    @NotBlank
     private int number_of_doses;
-    @NotBlank
-    private Timestamp vaccination_date;
-    @NotBlank
+    private LocalDate vaccination_date;
     private String user_id;
 
     public long getVaccination_id() {
@@ -85,27 +77,27 @@ public class Vaccination {
         this.number_of_doses = number_of_doses;
     }
 
-    public Timestamp getVaccination_date() {
+    public LocalDate getVaccination_date() {
         return vaccination_date;
     }
 
-    public void setVaccination_date(Timestamp vaccination_date) {
+    public void setVaccination_date(LocalDate vaccination_date) {
         this.vaccination_date = vaccination_date;
     }
 
-    public String getUsername() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUsername(String username) {
-        this.user_id = username;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     protected Vaccination(){
 
     }
 
-    public Vaccination(String vaccine_name, String vaccine_type, String target_disease, String vaccination_center, String country, int number_of_doses, Timestamp vaccination_date, String user_id) {
+    public Vaccination(String vaccine_name, String vaccine_type, String target_disease, String vaccination_center, String country, int number_of_doses, LocalDate vaccination_date, String user_id) {
         this.vaccine_name = vaccine_name;
         this.vaccine_type = vaccine_type;
         this.target_disease = target_disease;

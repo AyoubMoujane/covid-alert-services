@@ -54,7 +54,7 @@ public class VaccinationService {
         if(vaccinationRepository.findById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vaccination with ID "+id+" not found");
         }
-        if (vaccination.getVaccination_date() == null || vaccination.getVaccination_center().isEmpty() || vaccination.getCountry() == null || vaccination.getTarget_disease().isEmpty() || vaccination.getUsername().isEmpty() || vaccination.getVaccine_name().isEmpty() || vaccination.getVaccine_type().isEmpty()){
+        if (vaccination.getVaccination_date() == null || vaccination.getVaccination_center().isEmpty() || vaccination.getCountry() == null || vaccination.getTarget_disease().isEmpty() || vaccination.getUser_id().isEmpty() || vaccination.getVaccine_name().isEmpty() || vaccination.getVaccine_type().isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "attributes from vaccination are missing");
         }
         Vaccination existingVaccination = vaccinationRepository.findById(id).get();

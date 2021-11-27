@@ -3,6 +3,7 @@ package covidtest.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 
 @Entity
@@ -14,7 +15,7 @@ public class CovidTest {
     private String covidtest_type;
     private String covidtest_result;
     private int covidtest_valid_duration;
-    private Timestamp covidtest_date;
+    private LocalDate covidtest_date;
     private String user_id;
 
 
@@ -49,11 +50,11 @@ public class CovidTest {
         this.covidtest_valid_duration = covidtest_valid_duration;
     }
 
-    public Timestamp getCovidtest_date() {
+    public LocalDate getCovidtest_date() {
         return covidtest_date;
     }
 
-    public void setCovidtest_date(Timestamp covidtest_date) {
+    public void setCovidtest_date(LocalDate covidtest_date) {
         this.covidtest_date = covidtest_date;
     }
 
@@ -67,7 +68,7 @@ public class CovidTest {
 
     protected CovidTest(){}
 
-    public CovidTest(String covidtest_type, String covidtest_result, int covidtest_valid_duration, Timestamp covidtest_date, String user_id) {
+    public CovidTest(String covidtest_type, String covidtest_result, int covidtest_valid_duration, LocalDate covidtest_date, String user_id) {
             this.covidtest_type = covidtest_type;
             this.covidtest_result = covidtest_result;
             this.covidtest_valid_duration = covidtest_valid_duration;

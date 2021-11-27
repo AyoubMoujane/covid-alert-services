@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Transactional
@@ -74,7 +75,7 @@ public class CovidTestService {
     public boolean covidTestPositif(CovidTest covidTest){
         boolean result = false;
         System.out.println(covidTest.getCovidtest_result());
-        if (covidTest.getCovidtest_result().equals("positif")){
+        if (covidTest.getCovidtest_result().toLowerCase(Locale.ROOT).equals("positif")){
             result = true;
         }
         return result;
