@@ -8,6 +8,76 @@ userservice:
     strategy: depend
   only:
     changes:
-      - master
+      - prepare-cicd-pipeline-pierre
       - userservice/**/*
-
+#
+#vaccinationservice:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: vaccinationservice/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - vaccinationservice/**/*
+#
+#newsservice:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: newsservice/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - newsservice/**/*
+#
+#location_service:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: location_service/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - location_service/**/*
+#
+#discoveryserver:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: discoveryserver/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - discoveryserver/**/*
+#
+#covidtestservice:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: covidtestservice/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - covidtestservice/**/*
+#
+#configserver:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: configserver/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - configserver/**/*
+#
+#apigatewayservice:
+#  stage: trigger-microservices-pipelines
+#  trigger:
+#    include: apigatewayservice/.gitlab-ci.yml
+#    strategy: depend
+#  only:
+#    changes:
+#      - master
+#      - apigatewayservice/**/*
+#

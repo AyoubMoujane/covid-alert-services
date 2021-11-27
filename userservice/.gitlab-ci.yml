@@ -13,7 +13,7 @@ services:
 stages:
   - build-jar
   - build-image
-  - deploy-image
+#  - deploy-image
 
 before_script:
   - docker --version
@@ -40,7 +40,7 @@ build-microservice-jar:
     paths:
       - userservice/build/libs/*.jar
   only:
-    - master
+    - prepare-cicd-pipeline-pierre
 
 build-docker-image:
   stage: build-image
@@ -50,23 +50,25 @@ build-docker-image:
     - ls -l userservice/build/libs/
     - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./userservice
     - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
-    - echo "Pushing image..."
-    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+    - aws ecr-public describe-image-tags --repository-name covid-alert-services --region ${AWS_DEFAULT_REGION}
+    - aws ecr-public batch-delete-image --repository-name covid-alert-services --image-ids imageTag=userservice --region ${AWS_DEFAULT_REGION}
+#    - echo "Pushing image..."
+#    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
-    - master
+    - prepare-cicd-pipeline-pierre
 
 
-deploy-docker-image:
-  stage: deploy-image
-  script:
-#    - echo $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
-#    - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME --region ${AWS_DEFAULT_REGION})
-#    - echo $TASK_DEFINITION
-#    - NEW_CONTAINER_DEFINITION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
-#    - echo $NEW_CONTAINER_DEFINITION
-    - echo "Registering new container definition..."
-    - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --cli-input-json file://userservice/userservice-task-definition.json
-    - echo "Updating the service..."
-    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
-  only:
-    - master
+#deploy-docker-image:
+#  stage: deploy-image
+#  script:
+##    - echo $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+##    - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME --region ${AWS_DEFAULT_REGION})
+##    - echo $TASK_DEFINITION
+##    - NEW_CONTAINER_DEFINITION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
+##    - echo $NEW_CONTAINER_DEFINITION
+#    - echo "Registering new container definition..."
+#    - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --cli-input-json file://userservice/userservice-task-definition.json
+#    - echo "Updating the service..."
+#    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
+#  only:
+#    - master
