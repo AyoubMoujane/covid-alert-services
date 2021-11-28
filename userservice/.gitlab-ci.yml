@@ -89,6 +89,7 @@ deploy-docker-image:
   only:
     - prepare-cicd-pipeline-pierre
 
+
 #deploy-docker-image:
 #  stage: deploy-image
 #  script:
