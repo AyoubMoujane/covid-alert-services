@@ -17,6 +17,7 @@ stages:
   - deploy-image
 
 before_script:
+  - echo $BRANCH
   - docker --version
   - apk add --no-cache curl jq python3 py3-pip
   - pip install awscli
@@ -43,57 +44,57 @@ build-microservice-jar:
       - $SERVICE_NAME/build/libs/*.jar
   only:
     - prepare-cicd-pipeline-pierre
-
-build-docker-image:
-  stage: build-image
-
-  script:
-    - echo "Building image..."
-    - ls -l $SERVICE_NAME/build/libs/
-    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./$SERVICE_NAME
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
-    - echo "Pushing image..."
-    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
-  only:
-    - prepare-cicd-pipeline-pierre
-
-
-deploy-docker-image:
-  stage: deploy-image
-  before_script:
-    - ls -la
-    - pwd
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo $EC2_SSH_KEY
-    - echo "${EC2_SSH_KEY}" >> ~/.ssh/ssh-key.pem
-    - chmod 400 ~/.ssh/ssh-key.pem
-    - cat ~/.ssh/ssh-key.pem
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-
-
-  script:
-    - >-
-      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
-      '
-      ls
-      && cd covid-alert-services
-      && ls
-      && aws --version
-      && docker --version
-      && aws configure list
-      && aws ecr get-login-password | docker login --username AWS --password-stdin '"$REPOSITORY_URL"'
-      && docker pull '"$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG"'
-      && docker-compose stop user-service
-      && docker rm -f $(docker ps -q --filter "status=exited")
-      && docker-compose up -d user-service
-      '
-  only:
-    - prepare-cicd-pipeline-pierre
-
-
+#
+#build-docker-image:
+#  stage: build-image
+#
+#  script:
+#    - echo "Building image..."
+#    - ls -l $SERVICE_NAME/build/libs/
+#    - docker build -t $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG ./$SERVICE_NAME
+#    - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
+#    - echo "Pushing image..."
+#    - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+#  only:
+#    - prepare-cicd-pipeline-pierre
+#
+#
+#deploy-docker-image:
+#  stage: deploy-image
+#  before_script:
+#    - ls -la
+#    - pwd
+#    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+#    - eval $(ssh-agent -s)
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#    - echo $EC2_SSH_KEY
+#    - echo "${EC2_SSH_KEY}" >> ~/.ssh/ssh-key.pem
+#    - chmod 400 ~/.ssh/ssh-key.pem
+#    - cat ~/.ssh/ssh-key.pem
+#    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#
+#
+#  script:
+#    - >-
+#      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
+#      '
+#      ls
+#      && cd covid-alert-services
+#      && ls
+#      && aws --version
+#      && docker --version
+#      && aws configure list
+#      && aws ecr get-login-password | docker login --username AWS --password-stdin '"$REPOSITORY_URL"'
+#      && docker pull '"$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG"'
+#      && docker-compose stop user-service
+#      && docker rm -f $(docker ps -q --filter "status=exited")
+#      && docker-compose up -d user-service
+#      '
+#  only:
+#    - prepare-cicd-pipeline-pierre
+#
+#
 
 
 #deploy-docker-image:
