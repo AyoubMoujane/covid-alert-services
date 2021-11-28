@@ -13,9 +13,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    @Value("${env.webFrontOrigin}")
-    private String webFrontOrigin;
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("queue");
@@ -25,13 +22,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-
-        System.out.println("#################################################################");
-        System.out.println(webFrontOrigin);
-        System.out.println("#################################################################");
-
         registry.addEndpoint("/alerts")
-                .setAllowedOrigins(webFrontOrigin)
+                .setAllowedOrigins("http://localhost:3000","http://ec2-54-242-158-115.compute-1.amazonaws.com:3000")
                 .withSockJS();
     }
 
