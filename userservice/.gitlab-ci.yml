@@ -86,7 +86,7 @@ deploy-docker-image:
       && aws configure list
       && aws ecr get-login-password | docker login --username AWS --password-stdin '"$REPOSITORY_URL"'
       && docker pull '"$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG"'
-      && docker-compose down user-service
+      && docker-compose stop user-service
       && docker rm -f $(docker ps -q --filter "status=exited")
       && docker-compose up user-service
       '
