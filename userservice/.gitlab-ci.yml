@@ -84,8 +84,8 @@ deploy-docker-image:
       && aws --version
       && docker --version
       && aws configure list
-      && aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL
-      && docker pull $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+      && aws ecr get-login-password | docker login --username AWS --password-stdin '"$REPOSITORY_URL"'
+      && docker pull '"$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG"'
       '
   only:
     - prepare-cicd-pipeline-pierre
