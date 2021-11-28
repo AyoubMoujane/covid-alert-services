@@ -1,5 +1,6 @@
 package covidlocation.services;
 
+import covidlocation.models.Location;
 import covidlocation.repositories.LocationRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,17 +14,13 @@ import static org.mockito.Mockito.verify;
 
 class LocationServiceTest {
     @Mock
-    private LocationService serviceTested;
-    private AutoCloseable autoCloseable;
-    private LocationRepository locationRepository;
+    private LocationRepository serviceTested;
+    private Location location;
 
     @BeforeEach
     @Disabled
     void setUp() {
-        /*AutoCloseable autoCloseable =MockitoAnnotations.openMocks(this);
-        serviceTested = new LocationService(locationRepository);
-
-         */
+        location = new Location();
     }
 
     @AfterEach
