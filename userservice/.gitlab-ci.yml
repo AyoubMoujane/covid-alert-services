@@ -83,8 +83,6 @@ deploy-docker-image:
       && ls
       && aws --version
       && docker --version
-      && echo ${AWS_ACCESS_KEY_ID}
-      && configure set region "us-east-1"
       && aws configure list
       '
   only:
