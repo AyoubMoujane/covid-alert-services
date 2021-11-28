@@ -31,6 +31,9 @@ public class SendService {
             System.out.println("getUserLocationFromKafka :" + id + ", locations:"+ locations.toString());
             Set<UserAtRisk> usersAtRisk = this.getNearUserKafka(locations,allLocations);
             List<UserAtRisk> list = new ArrayList<UserAtRisk>( usersAtRisk );
+            System.out.println("################################################");
+            System.out.println(list);
+            System.out.println("################################################");
             producer.sendUserAtRiskMessage(list);
             return usersAtRisk;
         }
