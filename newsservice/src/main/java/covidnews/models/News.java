@@ -6,6 +6,10 @@ public class News {
     private String title;
     private String content;
 
+
+
+    private String image;
+
     public String getDateWritten() {
         return dateWritten;
     }
@@ -30,10 +34,19 @@ public class News {
         this.content = content;
     }
 
-    public News(String dateWritten, String title, String content) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public News(String dateWritten, String title, String content, String image) {
         this.dateWritten = dateWritten;
         this.title = title;
         this.content = content;
+        this.image = image;
     }
 
     public News() {
