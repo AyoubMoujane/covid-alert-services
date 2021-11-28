@@ -8,7 +8,6 @@ userservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: userservice/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -16,12 +15,10 @@ userservice:
       - $DEPLOY_BRANCH
       - userservice/**/*
 
-
 vaccinationservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: vaccinationservice/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -33,7 +30,6 @@ newsservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: newsservice/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -45,7 +41,6 @@ location_service:
   stage: trigger-microservices-pipelines
   trigger:
     include: location_service/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -57,7 +52,6 @@ discoveryserver:
   stage: trigger-microservices-pipelines
   trigger:
     include: discoveryserver/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -69,7 +63,6 @@ covidtestservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: covidtestservice/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -81,7 +74,6 @@ configserver:
   stage: trigger-microservices-pipelines
   trigger:
     include: configserver/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -93,7 +85,6 @@ apigatewayservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: apigatewayservice/.gitlab-ci.yml
-    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
