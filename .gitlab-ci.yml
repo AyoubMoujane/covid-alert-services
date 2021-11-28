@@ -13,6 +13,7 @@ userservice:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
+      - $DEPLOY_BRANCH
       - userservice/**/*
 
 
