@@ -84,8 +84,6 @@ deploy-docker-image:
       && aws --version
       && docker --version
       && echo ${AWS_ACCESS_KEY_ID}
-      && aws configure set aws_access_key_id "AKIA574IQW4BPBAMRGLB"
-      && aws configure set aws_secret_access_key "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"
       && configure set region "us-east-1"
       && aws configure list
       '
