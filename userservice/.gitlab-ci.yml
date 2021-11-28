@@ -44,7 +44,8 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - prepare-cicd-pipeline-pierre
+    - '${BRANCH}'
+
 #
 #build-docker-image:
 #  stage: build-image
