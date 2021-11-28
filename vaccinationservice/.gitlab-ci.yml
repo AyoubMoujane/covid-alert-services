@@ -38,7 +38,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - $BRANCH
+    - master
 
 build-docker-image:
   stage: build-image
@@ -51,7 +51,7 @@ build-docker-image:
     - echo "Pushing image..."
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
-    - $BRANCH
+    - master
 
 
 deploy-docker-image:
@@ -72,7 +72,7 @@ deploy-docker-image:
 
   script:
     - >-
-      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
+      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@${EC2_URL} \
       '
       ls
       && cd covid-alert-services
@@ -87,4 +87,4 @@ deploy-docker-image:
       && docker-compose up -d vaccination-service
       '
   only:
-    - $BRANCH
+    - master
