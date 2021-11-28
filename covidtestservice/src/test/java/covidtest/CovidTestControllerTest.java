@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.mockito.Mockito.doReturn;
@@ -31,15 +31,14 @@ public class CovidTestControllerTest {
     @MockBean
     private CovidTestService service;
 
-    /*
+
     @Test
     @DisplayName("GET /covidtests/0 - Found")
     void testGetCovidTestByIdFound() throws Exception {
 
         // Set up the mock service
-        Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
-        CovidTest mockCovidTest = new CovidTest("PCR", "positif", 72, timestamp, "1");
+        LocalDate date = LocalDate.of(2020, 1, 8);
+        CovidTest mockCovidTest = new CovidTest("PCR", "positif", 72, date, "1");
         System.out.println(mockCovidTest);
         doReturn(mockCovidTest).when(service).findCovidTestById(Long.valueOf("0"));
 
@@ -52,13 +51,13 @@ public class CovidTestControllerTest {
                 //.andExpect(header().string(HttpHeaders.LOCATION, "/covidtests/0"))
 
                 //Validate the returned fields
-                .andExpect(jsonPath("$.length()", is(5)))
+                .andExpect(jsonPath("$.length()", is(6)))
                 .andExpect(jsonPath("$.covidtest_type", is("PCR")))
                 .andExpect(jsonPath("$.covidtest_result", is("positif")))
                 .andExpect(jsonPath("$.covidtest_valid_duration", is(72)))
                 .andExpect(jsonPath("$.user_id", is("1")));
     }
-    */
+
 
 
 //    @Test
@@ -74,19 +73,18 @@ public class CovidTestControllerTest {
 //                .andExpect(status().isNotFound());
 //    }
 
-    /*
+
     @Test
     @DisplayName("Post /covidtests - Success")
     void testCreateCovidTest() throws Exception {
 
         // Set up the mock service
-        Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
+        LocalDate date = LocalDate.of(2020, 1, 8);
         System.out.println("###########");
-        System.out.println(timestamp.toString());
+        System.out.println(date.toString());
         System.out.println("###########");
-        CovidTest mockCovidTest = new CovidTest("PCR", "positif", 72, timestamp, "1");
-        CovidTest postCovidTest = new CovidTest("PCR", "positif", 72, timestamp, "1");
+        CovidTest mockCovidTest = new CovidTest("PCR", "positif", 72, date, "1");
+        CovidTest postCovidTest = new CovidTest("PCR", "positif", 72, date, "1");
         doReturn(mockCovidTest).when(service).addCovidTest(any());
 
         // Execute the Get Request
@@ -100,14 +98,14 @@ public class CovidTestControllerTest {
                 //.andExpect(header().string(HttpHeaders.LOCATION, "/covidtests/0"))
 
                 //Validate the returned fields
-                .andExpect(jsonPath("$.length()", is(5)))
+                .andExpect(jsonPath("$.length()", is(6)))
                 .andExpect(jsonPath("$.covidtest_type", is("PCR")))
                 .andExpect(jsonPath("$.covidtest_result", is("positif")))
                 .andExpect(jsonPath("$.covidtest_valid_duration", is(72)))
                 .andExpect(jsonPath("$.user_id", is("1")));
     }
 
-     */
+
 
 //    @Test
 //    @DisplayName("Put /covidtests/0 - Success")
