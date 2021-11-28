@@ -75,7 +75,7 @@ deploy-docker-image:
 
 
   script:
-    - ssh -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
+    - ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
     - ls -l
   only:
     - prepare-cicd-pipeline-pierre
