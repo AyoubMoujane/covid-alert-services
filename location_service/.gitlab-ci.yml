@@ -73,7 +73,7 @@ deploy-docker-image:
 
   script:
     - >-
-      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
+      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@${EC2_URL} \
       '
       ls
       && cd covid-alert-services
