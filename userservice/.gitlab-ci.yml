@@ -78,7 +78,11 @@ deploy-docker-image:
     - >-
       ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
       '
-      ls'
+      ls
+      && cd covid-alert-services
+      && ls
+      && aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
+      && docker pull $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG'
   only:
     - prepare-cicd-pipeline-pierre
 
