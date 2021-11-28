@@ -56,7 +56,7 @@ public class SendService {
 
         List<UserAtRisk> usersAtRisk = new ArrayList<>();
         for (Location loc :locations){
-            if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME)) {
+            if (loc.isCloseto(location,MAX_DISTANCE) && loc.isMoreRecentThan(CONTAGION_TIME) && !loc.getUser_id().equals(location.getUser_id())) {
                 usersAtRisk.add(new UserAtRisk(loc.getUser_id(),loc.getLocation_date()));
             }
         }
