@@ -7,6 +7,8 @@ variables:
   ARTIFACT_NAME: userservice-0.0.1.jar
   TASK_DEFINITION_NAME: userservice_task
   CLUSTER_NAME: covidalert-microservices
+  BRANCH_NAME: $BRANCH
+
 
 services:
   - docker:dind
@@ -44,7 +46,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - '${BRANCH}'
+    - $BRANCH_NAME
 
 #
 #build-docker-image:
