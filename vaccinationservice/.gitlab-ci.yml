@@ -38,7 +38,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - master
+    - prepare-cicd-pipeline-pierre
 
 build-docker-image:
   stage: build-image
@@ -87,4 +87,4 @@ deploy-docker-image:
       && docker-compose up -d vaccination-service
       '
   only:
-    - master
+    - prepare-cicd-pipeline-pierre
