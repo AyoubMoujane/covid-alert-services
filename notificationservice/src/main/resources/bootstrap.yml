@@ -4,5 +4,3 @@ spring:
       uri: http://config-server:8888
   application:
     name: notification-service
-  profiles:
-    active: development
