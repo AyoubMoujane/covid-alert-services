@@ -2,7 +2,7 @@ stages:
   - trigger-microservices-pipelines
 
 variables:
-  DEPLOY_BRANCH: "master"
+  DEPLOY_BRANCH: "prepare-cicd-pipeline-pierre"
 
 userservice:
   stage: trigger-microservices-pipelines
@@ -13,7 +13,7 @@ userservice:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
-      - prepare-cicd-pipeline-pierre
+      - $DEPLOY_BRANCH
       - userservice/**/*
 
 
@@ -26,7 +26,7 @@ vaccinationservice:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
-      - master
+      - $DEPLOY_BRANCH
       - vaccinationservice/**/*
 
 #newsservice:
@@ -38,7 +38,7 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - newsservice/**/*
 #
 #location_service:
@@ -50,7 +50,7 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - location_service/**/*
 #
 #discoveryserver:
@@ -62,7 +62,7 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - discoveryserver/**/*
 #
 #covidtestservice:
@@ -74,7 +74,7 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - covidtestservice/**/*
 #
 #configserver:
@@ -86,7 +86,7 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - configserver/**/*
 #
 #apigatewayservice:
@@ -98,6 +98,6 @@ vaccinationservice:
 #    BRANCH: $DEPLOY_BRANCH
 #  only:
 #    changes:
-#      - master
+#      - $DEPLOY_BRANCH
 #      - apigatewayservice/**/*
 #
