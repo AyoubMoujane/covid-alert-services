@@ -4,10 +4,47 @@ stages:
 variables:
   DEPLOY_BRANCH: master
 
+configserver:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: configserver/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    BRANCH: $DEPLOY_BRANCH
+  only:
+    changes:
+      - $DEPLOY_BRANCH
+      - configserver/**/*
+
+discoveryserver:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: discoveryserver/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    BRANCH: $DEPLOY_BRANCH
+  only:
+    changes:
+      - $DEPLOY_BRANCH
+      - discoveryserver/**/*
+
+apigatewayservice:
+  stage: trigger-microservices-pipelines
+  trigger:
+    include: apigatewayservice/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    BRANCH: $DEPLOY_BRANCH
+  only:
+    changes:
+      - $DEPLOY_BRANCH
+      - apigatewayservice/**/*
+
 userservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: userservice/.gitlab-ci.yml
+    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -19,6 +56,7 @@ vaccinationservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: vaccinationservice/.gitlab-ci.yml
+    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -30,6 +68,7 @@ newsservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: newsservice/.gitlab-ci.yml
+    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -41,6 +80,7 @@ location_service:
   stage: trigger-microservices-pipelines
   trigger:
     include: location_service/.gitlab-ci.yml
+    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
@@ -48,47 +88,16 @@ location_service:
       - $DEPLOY_BRANCH
       - location_service/**/*
 
-discoveryserver:
-  stage: trigger-microservices-pipelines
-  trigger:
-    include: discoveryserver/.gitlab-ci.yml
-  variables:
-    BRANCH: $DEPLOY_BRANCH
-  only:
-    changes:
-      - $DEPLOY_BRANCH
-      - discoveryserver/**/*
 
 covidtestservice:
   stage: trigger-microservices-pipelines
   trigger:
     include: covidtestservice/.gitlab-ci.yml
+    strategy: depend
   variables:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
       - $DEPLOY_BRANCH
       - covidtestservice/**/*
-
-configserver:
-  stage: trigger-microservices-pipelines
-  trigger:
-    include: configserver/.gitlab-ci.yml
-  variables:
-    BRANCH: $DEPLOY_BRANCH
-  only:
-    changes:
-      - $DEPLOY_BRANCH
-      - configserver/**/*
-
-apigatewayservice:
-  stage: trigger-microservices-pipelines
-  trigger:
-    include: apigatewayservice/.gitlab-ci.yml
-  variables:
-    BRANCH: $DEPLOY_BRANCH
-  only:
-    changes:
-      - $DEPLOY_BRANCH
-      - apigatewayservice/**/*
 
