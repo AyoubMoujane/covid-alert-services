@@ -83,6 +83,7 @@ deploy-docker-image:
       && ls
       && aws --version
       && docker --version
+      && echo ${AWS_ACCESS_KEY_ID}
       && docker images
       '
   only:
