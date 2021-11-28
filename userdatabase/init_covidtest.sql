@@ -9,8 +9,8 @@ CREATE TABLE covidtests(
 
 
 
-INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1,'PCR','négatif',72,'2004-05-23T14:25:10','1');
-INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(2,'PCR','négatif',72,'2004-05-23T14:25:10','2');
-INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(3,'Antigénique','négatif',48,'2004-05-23T14:25:10','2');
-INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(4,'Antigénique','négatif',48,'2004-05-23T14:25:10','1');
-INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(5,'Antigénique','positif',48,'2004-05-23T14:25:10','3');
+INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1001,'PCR','négatif',72,'2004-05-23T14:25:10','1');
+INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1002,'PCR','négatif',72,'2004-05-23T14:25:10','2');
+INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1003,'Antigénique','négatif',48,'2004-05-23T14:25:10','2');
+INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1004,'Antigénique','négatif',48,'2004-05-23T14:25:10','1');
+INSERT INTO covidtests(covidtest_id,covidtest_type,covidtest_result,covidtest_valid_duration,covidtest_date,user_id) VALUES(1005,'Antigénique','positif',48,'2004-05-23T14:25:10','3');

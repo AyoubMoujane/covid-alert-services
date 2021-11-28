@@ -12,8 +12,8 @@ CREATE TABLE vaccinations(
 
 
 
-INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1,'Covid-19 vaccines','pfizer','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'1');
-INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(2,'Covid-19 vaccines','moderna','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'2');
-INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(3,'Covid-19 vaccines','moderna','COVID-19','Vailhauques','FR','2004-05-23T14:25:10',2,'2');
-INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(4,'Covid-19 vaccines','pfizer','COVID-19','Vailhauques','FR','2004-05-23T14:25:10',2,'1');
-INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(5,'Covid-19 vaccines','pfizer','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'3');
+INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1001,'Covid-19 vaccines','pfizer','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'1');
+INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1002,'Covid-19 vaccines','moderna','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'2');
+INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1003,'Covid-19 vaccines','moderna','COVID-19','Vailhauques','FR','2004-05-23T14:25:10',2,'2');
+INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1004,'Covid-19 vaccines','pfizer','COVID-19','Vailhauques','FR','2004-05-23T14:25:10',2,'1');
+INSERT INTO vaccinations(vaccination_id,vaccine_name,vaccine_type,target_disease,vaccination_center,country,vaccination_date,number_of_doses,user_id) VALUES(1005,'Covid-19 vaccines','pfizer','COVID-19','Mairie de Montpellier','FR','2004-05-23T14:25:10',1,'3');
