@@ -21,12 +21,9 @@ public class WSService {
     }
 
     public void notifyUsersAtRisk(List<UserAlert> usersAtRisk) {
-        String message = "Vous récemment été en contact avec une personne testée positive à la COVID-19";
-
         for(UserAlert userAlert : usersAtRisk) {
-            simpMessagingTemplate.convertAndSendToUser(userAlert.getUser_id(),"/queue/messages", new Message(message));
+            simpMessagingTemplate.convertAndSendToUser(userAlert.getUser_id(),"/queue/messages", new UserAlert(userAlert.getUser_id(), userAlert.getLocation_date()));
         }
-
     }
 
 }
