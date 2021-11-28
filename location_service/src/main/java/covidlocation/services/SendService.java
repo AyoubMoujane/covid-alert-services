@@ -6,10 +6,8 @@ import covidlocation.models.UserAtRisk;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -31,10 +29,12 @@ public class SendService {
             System.out.println("getUserLocationFromKafka :" + id + ", locations:"+ locations.toString());
             Set<UserAtRisk> usersAtRisk = this.getNearUserKafka(locations,allLocations);
             List<UserAtRisk> list = new ArrayList<UserAtRisk>( usersAtRisk );
-            System.out.println("################################################");
-            System.out.println(list);
-            System.out.println("################################################");
-            producer.sendUserAtRiskMessage(list);
+
+            Collection<UserAtRisk> listWithoutDuplicates = list.stream()
+                    .collect(Collectors.toMap(UserAtRisk::getUser_id, Function.identity(),
+                            (person1, person2) -> person2))
+                    .values();
+            producer.sendUserAtRiskMessage((List<UserAtRisk>) listWithoutDuplicates);
             return usersAtRisk;
         }
         catch (Exception exception) {
