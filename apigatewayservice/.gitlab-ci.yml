@@ -38,7 +38,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - $BRANCH
+    - master
 
 build-docker-image:
   stage: build-image
@@ -51,7 +51,7 @@ build-docker-image:
     - echo "Pushing image..."
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
-    - $BRANCH
+    - master
 
 deploy-docker-image:
   stage: deploy-image
@@ -86,4 +86,4 @@ deploy-docker-image:
       && docker-compose up -d api-gateway-service
       '
   only:
-    - $BRANCH
+    - master

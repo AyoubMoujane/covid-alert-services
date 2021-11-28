@@ -44,7 +44,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - prepare-cicd-pipeline-pierre
+    - master
 
 
 build-docker-image:
@@ -58,7 +58,7 @@ build-docker-image:
     - echo "Pushing image..."
     - docker push $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
   only:
-    - prepare-cicd-pipeline-pierre
+    - master
 
 
 deploy-docker-image:
@@ -94,7 +94,7 @@ deploy-docker-image:
       && docker-compose up -d user-service
       '
   only:
-    - prepare-cicd-pipeline-pierre
+    - master
 
 
 
