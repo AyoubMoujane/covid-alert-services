@@ -81,7 +81,7 @@ deploy-docker-image:
       ls
       && cd covid-alert-services
       && ls
-      && docker --version
+      && docker --version'
   only:
     - prepare-cicd-pipeline-pierre
 
