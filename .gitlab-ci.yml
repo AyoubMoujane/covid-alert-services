@@ -2,7 +2,7 @@ stages:
   - trigger-microservices-pipelines
 
 variables:
-  DEPLOY_BRANCH: "prepare-cicd-pipeline-pierre"
+  DEPLOY_BRANCH: prepare-cicd-pipeline-pierre
 
 userservice:
   stage: trigger-microservices-pipelines

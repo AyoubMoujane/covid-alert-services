@@ -44,7 +44,7 @@ build-microservice-jar:
     paths:
       - $SERVICE_NAME/build/libs/*.jar
   only:
-    - ${BRANCH}
+    - $BRANCH
 #
 #build-docker-image:
 #  stage: build-image
