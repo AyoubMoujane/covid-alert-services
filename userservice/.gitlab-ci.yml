@@ -81,7 +81,7 @@ deploy-docker-image:
       ls
       && cd covid-alert-services
       && ls
-      && docker pull $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG'
+      && docker --version
   only:
     - prepare-cicd-pipeline-pierre
 
