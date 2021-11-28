@@ -68,14 +68,14 @@ deploy-docker-image:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo $EC2_SSH_KEY
-    - echo $EC2_SSH_KEY >> ~/.ssh/ssh-key.pem
-    - chmod 400 ~/.ssh/ssh-key.pem
-    - cat ~/.ssh/ssh-key.pem
+    - echo $EC2_SSH_KEY >> ~/.ssh/ec2-config-efs.pem
+    - chmod 400 ~/.ssh/ec2-config-efs.pem
+    - cat ~/.ssh/ec2-config-efs.pem
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
 
   script:
-    - ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL
+    - ssh -tt -i ~/.ssh/ec2-config-efs.pem ec2-user@$EC2_URL
     - ls -l
   only:
     - prepare-cicd-pipeline-pierre
