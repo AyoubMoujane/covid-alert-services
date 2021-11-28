@@ -13,7 +13,6 @@ userservice:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
-      - $DEPLOY_BRANCH
       - userservice/**/*
 
 
@@ -26,7 +25,6 @@ vaccinationservice:
     BRANCH: $DEPLOY_BRANCH
   only:
     changes:
-      - $DEPLOY_BRANCH
       - vaccinationservice/**/*
 
 #newsservice:

@@ -108,4 +108,3 @@ deploy-docker-image:
 #    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
 #  only:
 #    - master
-
