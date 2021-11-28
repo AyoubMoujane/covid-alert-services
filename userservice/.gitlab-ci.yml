@@ -35,6 +35,7 @@ build-microservice-jar:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
     - echo ${SERVICE_NAME}
+    - echo $BRANCH
   script:
     - ls -l $SERVICE_NAME/
     - ./gradlew $SERVICE_NAME:bootJar
