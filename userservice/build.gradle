@@ -16,7 +16,9 @@ repositories {
 
 ext {
     set('springCloudVersion', "2020.0.4")
+    set('artifactName',"${project.name}:${project.version}")
 }
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'

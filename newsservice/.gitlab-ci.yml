@@ -1,12 +1,9 @@
 variables:
-  SERVICE_NAME: userservice
+  SERVICE_NAME: notificationservice
   REPOSITORY_URL: 961822111490.dkr.ecr.us-east-1.amazonaws.com
   APP_NAME: covid-alert-services
-  IMAGE_TAG: userservice
-  ARTIFACT_NAME: userservice-0.0.1.jar
-  TASK_DEFINITION_NAME: userservice_task
-  CLUSTER_NAME: covidalert-microservices
-
+  IMAGE_TAG: newsservice
+  ARTIFACT_NAME: newsservice-0.0.1.jar
 
 services:
   - docker:dind
@@ -17,7 +14,6 @@ stages:
   - deploy-image
 
 before_script:
-  - echo $BRANCH
   - docker --version
   - apk add --no-cache curl jq python3 py3-pip
   - pip install awscli
@@ -34,8 +30,6 @@ build-microservice-jar:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - echo $ARTIFACT_NAME
-    - echo ${SERVICE_NAME}
-    - echo $BRANCH
   script:
     - ls -l $SERVICE_NAME/
     - ./gradlew $SERVICE_NAME:bootJar
@@ -45,7 +39,6 @@ build-microservice-jar:
       - $SERVICE_NAME/build/libs/*.jar
   only:
     - master
-
 
 build-docker-image:
   stage: build-image
@@ -79,7 +72,7 @@ deploy-docker-image:
 
   script:
     - >-
-      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@${EC2_URL} \
+      ssh -tt -i ~/.ssh/ssh-key.pem ec2-user@$EC2_URL \
       '
       ls
       && cd covid-alert-services
@@ -89,27 +82,9 @@ deploy-docker-image:
       && aws configure list
       && aws ecr get-login-password | docker login --username AWS --password-stdin '"$REPOSITORY_URL"'
       && docker pull '"$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG"'
-      && docker-compose stop user-service
+      && docker-compose stop news-service
       && docker rm -f $(docker ps -q --filter "status=exited")
-      && docker-compose up -d user-service
+      && docker-compose up -d news-service
       '
   only:
     - master
-
-
-
-
-#deploy-docker-image:
-#  stage: deploy-image
-#  script:
-##    - echo $REPOSITORY_URL/$APP_NAME:$IMAGE_TAG
-##    - TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME --region ${AWS_DEFAULT_REGION})
-##    - echo $TASK_DEFINITION
-##    - NEW_CONTAINER_DEFINITION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$REPOSITORY_URL/$APP_NAME:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image = $IMAGE | .taskDefinition.containerDefinitions[0]')
-##    - echo $NEW_CONTAINER_DEFINITION
-#    - echo "Registering new container definition..."
-#    - aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_DEFINITION_NAME} --cli-input-json file://userservice/userservice-task-definition.json
-#    - echo "Updating the service..."
-#    - aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME}  --task-definition ${TASK_DEFINITION_NAME}
-#  only:
-#    - master
