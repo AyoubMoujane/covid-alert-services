@@ -26,3 +26,8 @@ To stop the service you need to run the command
 ```bash
 docker compose down -v
 ```
+
+# Microservice architecture
+
+![alt text](./documentation/backend-microservices-deployment-diagram.png)
+
